@@ -1,50 +1,31 @@
-# Feature_Request - Request & Support Test Cases
+# Feature_Request - Request & Support UI Test Cases
 
 ## Sheet Information
 
 | Field | Value |
 |-------|-------|
 | **Feature** | Request & Support |
-| **Test requirement** | API and design are available |
-| **Number of TCs** | 10 |
+| **Test requirement** | Ticket page available |
+| **Number of TCs** | 5 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 10 | 0 |
-| Round 2 | 0 | 0 | 10 | 0 |
-| Round 3 | 0 | 0 | 10 | 0 |
+| Round 1 | 0 | 0 | 5 | 0 |
+| Round 2 | 0 | 0 | 5 | 0 |
+| Round 3 | 0 | 0 | 5 | 0 |
 
 ---
 
 ## Test Cases
 
-### Create Request
+### Ticket Page (/ticket)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| REQ01 | Create support request | 1. Login<br>2. Call POST `/api/RequestTicket`<br>3. Send requestType=SupportRequest, message | - Request created (Pending)<br>- Status 201 Created | Logged in |
-| REQ02 | Create refund request | 1. Login<br>2. Call POST `/api/RequestTicket`<br>3. Send requestType=RefundRequest, orderId | - Refund request created<br>- Linked to order<br>- Status 201 Created | Logged in, has order |
-| REQ03 | Get request by ID | 1. Login<br>2. Call GET `/api/RequestTicket/{requestId}` | - Request details returned<br>- Includes messages | Request exists |
-| REQ04 | Get my requests | 1. Login<br>2. Call GET `/api/RequestTicket/my-requests?page=1` | - List of user's requests<br>- Status 200 OK | Logged in |
-
----
-
-### Request Messages
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| REQ05 | Send new message | 1. Login<br>2. Call POST `/api/RequestTicket/{requestId}/message`<br>3. Send message content | - Message added to request<br>- Status 201 Created | Request exists |
-| REQ06 | Send 4th message (not allowed) | 1. Login<br>2. Request already has 3 messages<br>3. Try to send 4th message | - Error: Max 3 messages<br>- Status 400 Bad Request | Request with 3 messages |
-
----
-
-### Process Request (Admin/Staff)
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| REQ07 | Get all requests (Admin/Staff) | 1. Login as Admin/Staff<br>2. Call GET `/api/RequestTicket?page=1` | - List of all requests<br>- Status 200 OK | Logged in as Admin/Staff |
-| REQ08 | Filter requests by type | 1. Login as Admin/Staff<br>2. Call GET `/api/RequestTicket?requestType=RefundRequest` | - Only refund requests returned | Requests exist |
-| REQ09 | Approve request | 1. Login as Admin/Staff<br>2. Call PATCH `/api/RequestTicket/{requestId}/process`<br>3. Send status=Approved, responseNote | - Request approved<br>- Status 200 OK | Pending request exists |
-| REQ10 | Reject request with reason | 1. Login as Admin/Staff<br>2. Call PATCH `/api/RequestTicket/{requestId}/process`<br>3. Send status=Rejected, responseNote | - Request rejected<br>- Reason saved<br>- Status 200 OK | Pending request exists |
+| REQ01 | View ticket list | 1. Login<br>2. Navigate to /ticket or Support page | - Ticket list displays<br>- Each ticket: ID, title, status, date<br>- Status badges (Pending, Processing, Resolved)<br>- "Tạo yêu cầu mới" button | Logged in |
+| REQ02 | Create support ticket | 1. Go to ticket page<br>2. Click "Tạo yêu cầu mới"<br>3. Fill form:<br>- Select ticket type (Support/Refund)<br>- Enter title<br>- Enter description<br>- Attach files (optional)<br>4. Click submit | - Create form/modal opens<br>- Type dropdown works<br>- Text fields work<br>- File upload works<br>- Success toast "Yêu cầu đã được gửi"<br>- New ticket in list | Logged in |
+| REQ03 | Create ticket with empty fields | 1. Go to create ticket form<br>2. Leave title empty<br>3. Click submit | - Validation error shows<br>- "Tiêu đề không được để trống"<br>- Form not submitted | Logged in |
+| REQ04 | View ticket detail | 1. Go to ticket list<br>2. Click on a ticket row | - Ticket detail page/modal opens<br>- Full description shown<br>- Attachments visible<br>- Status and timeline shown<br>- Response from staff (if any) | Ticket exists |
+| REQ05 | Filter tickets by status | 1. Go to ticket list<br>2. Click on status filter<br>3. Select "Đang xử lý" | - Tickets filtered by status<br>- Only matching tickets shown<br>- Filter indicator active | Has multiple tickets |

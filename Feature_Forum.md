@@ -1,54 +1,39 @@
-# Feature_Forum - Forum Test Cases
+# Feature_Forum - Forum UI Test Cases
 
 ## Sheet Information
 
 | Field | Value |
 |-------|-------|
 | **Feature** | Forum |
-| **Test requirement** | API and design are available |
-| **Number of TCs** | 14 |
+| **Test requirement** | Forum page, Forum detail page available |
+| **Number of TCs** | 6 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 14 | 0 |
-| Round 2 | 0 | 0 | 14 | 0 |
-| Round 3 | 0 | 0 | 14 | 0 |
+| Round 1 | 0 | 0 | 6 | 0 |
+| Round 2 | 0 | 0 | 6 | 0 |
+| Round 3 | 0 | 0 | 6 | 0 |
 
 ---
 
 ## Test Cases
 
-### Forum Category
+### Forum Page (/forum)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| FORUM01 | Get all forum categories | 1. Call GET `/api/ForumCategory` | - List of categories returned<br>- Status 200 OK | Categories exist |
-| FORUM02 | Create forum category | 1. Login<br>2. Call POST `/api/ForumCategory`<br>3. Send category name | - Category created<br>- Status 201 Created | Logged in |
+| FORUM01 | View forum post list | 1. Navigate to /forum page | - Loading spinner shows first<br>- Post cards displayed in grid<br>- Each post shows: title, preview image, date<br>- Pagination at bottom<br>- "Đăng Bài Viết Mới" button visible | Page loaded |
+| FORUM02 | Navigate forum pagination | 1. Go to /forum<br>2. Click page 2 in pagination<br>3. Click "Trước" button<br>4. Click "Sau" button | - Page changes smoothly<br>- Posts update<br>- Current page highlighted<br>- Scroll to top on page change | Multiple pages exist |
+| FORUM03 | Create new forum post | 1. Login<br>2. Go to /forum<br>3. Click "Đăng Bài Viết Mới"<br>4. Fill form:<br>- Title<br>- Select category<br>- Add text content<br>- Add images (optional)<br>5. Click submit | - Create post form/section shows<br>- Category dropdown works<br>- Text editor works<br>- Image upload works<br>- Success toast "Đăng bài viết thành công"<br>- New post appears in list | Logged in |
 
 ---
 
-### Forum Post
+### Forum Detail Page (/forum/:id)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| FORUM03 | Get all forum posts | 1. Call GET `/api/ForumPost?page=1&pageSize=10` | - List of posts returned<br>- Pagination info | Posts exist |
-| FORUM04 | Get posts by category | 1. Call GET `/api/ForumPost/category/{categoryId}` | - Only posts in category returned | Category has posts |
-| FORUM05 | Get post detail | 1. Call GET `/api/ForumPost/{id}` | - Post detail with content blocks<br>- Images included | Post exists |
-| FORUM06 | Create forum post | 1. Login<br>2. Call POST `/api/ForumPost` (multipart)<br>3. Send title, content, images | - Post created<br>- Images uploaded<br>- Status 200 OK | Logged in |
-| FORUM07 | Update forum post | 1. Login as post owner<br>2. Call PUT `/api/ForumPost/{id}`<br>3. Update content | - Post updated<br>- Status 200 OK | Own post exists |
-| FORUM08 | Delete forum post | 1. Login as post owner<br>2. Call DELETE `/api/ForumPost/{id}` | - Post deleted<br>- Status 200 OK | Own post exists |
-| FORUM09 | Like forum post | 1. Login<br>2. Call POST `/api/ForumPost/{id}/like` | - Like count increased<br>- Status 200 OK | Post exists |
-| FORUM10 | Increase view count | 1. Call POST `/api/ForumPost/{id}/view` | - View count increased<br>- Status 200 OK | Post exists |
-
----
-
-### Forum Comment
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| FORUM11 | Get post with comments | 1. Call GET `/api/ForumPost/{id}/with-comments` | - Post with all comments returned | Post has comments |
-| FORUM12 | Create comment | 1. Login<br>2. Call POST `/api/ForumComment`<br>3. Send post ID, content | - Comment created<br>- Status 201 Created | Logged in, post exists |
-| FORUM13 | Reply to comment | 1. Login<br>2. Call POST `/api/ForumComment`<br>3. Send parent comment ID | - Reply created<br>- Nested under parent | Parent comment exists |
-| FORUM14 | Delete comment | 1. Login as comment owner<br>2. Call DELETE `/api/ForumComment/{id}` | - Comment deleted<br>- Status 200 OK | Own comment exists |
+| FORUM04 | View post detail | 1. Go to /forum<br>2. Click on any post card | - Navigate to /forum/{id}<br>- Post title displays<br>- Full content shows (text + images)<br>- Author info visible<br>- Comments section visible | Post exists |
+| FORUM05 | Add comment to post | 1. Login<br>2. Go to post detail page<br>3. Scroll to comment section<br>4. Enter comment text<br>5. Click "Gửi" or submit | - Comment input shows<br>- Submit button works<br>- Loading on submit<br>- New comment appears in list<br>- Comment count updates | Logged in |
+| FORUM06 | View empty forum state | 1. Go to /forum when no posts exist | - Empty state message shows<br>- "Chưa có bài viết nào" message<br>- Illustration/icon for empty state | No posts in database |

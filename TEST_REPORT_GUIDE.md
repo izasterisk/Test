@@ -1,8 +1,22 @@
-# Test Report Guide - VerdantTech Solutions Backend
+# Test Report Guide - VerdantTech Solutions Frontend
 
 ## Overview
 
-This document provides guidance for writing Test Reports for VerdantTech Solutions Backend (.NET 8).
+This document provides guidance for writing **UI Test Reports** for VerdantTech Solutions Frontend (React + Vite).
+Test cases focus on **User Interface Testing** - testing user interactions, form validations, navigation, and UI behaviors.
+
+---
+
+## Test Environment
+
+| Item | Value |
+|------|-------|
+| **Frontend** | React 18 + Vite + TypeScript |
+| **UI Library** | shadcn/ui, Tailwind CSS |
+| **Browser** | Chrome/Edge (latest version) |
+| **Screen Resolution** | 1920x1080 (Desktop), 375x812 (Mobile) |
+| **Test URL** | http://localhost:5173 |
+| **Test Accounts** | Customer: customer@gmail.com / 123456<br>Vendor: vendor@gmail.com / 123456<br>Admin: admin@gmail.com / 123456 |
 
 ---
 
@@ -21,21 +35,21 @@ This document provides guidance for writing Test Reports for VerdantTech Solutio
 
 | No | Function Name | Sheet Name | Description | Pre-Condition |
 |----|---------------|------------|-------------|---------------|
-| 1 | Authentication | Feature_Auth | Login, register, forgot password, refresh token | Test account available |
-| 2 | User Management | Feature_User | Manage user info and addresses | Logged in |
-| 3 | Product | Feature_Product | Manage products, categories, reviews | Logged in |
-| 4 | Cart & Order | Feature_Order | Shopping cart and order placement | Logged in as Customer |
-| 5 | Inventory | Feature_Inventory | Batch import, export, serial management | Product exists |
-| 6 | Vendor | Feature_Vendor | Vendor registration, profile, certificates | No login required for registration |
-| 7 | Payment & Wallet | Feature_Payment | PayOS payment, wallet, withdrawal | Order exists / Logged in as Vendor |
-| 8 | Farm & Crop | Feature_Farm | Farm profile, crops, CO2, weather | Logged in |
-| 9 | Forum | Feature_Forum | Categories, posts, comments | Logged in |
-| 10 | Notification | Feature_Notification | System notifications | Logged in |
-| 11 | Request & Support | Feature_Request | Support requests, refunds | Logged in |
-| 12 | Chatbot | Feature_Chatbot | AI chatbot support | Logged in |
-| 13 | Dashboard | Feature_Dashboard | Statistics for Admin/Staff | Logged in as Admin/Staff |
-| 14 | Product Registration | Feature_ProductReg | Vendor registers new products | Logged in as Vendor |
-| 15 | Certificate | Feature_Certificate | Product and vendor certificates | Product/vendor exists |
+| 1 | Authentication | Feature_Auth | Login page, Sign up page, Forgot password, Email verification | Browser opened |
+| 2 | User Management | Feature_User | Profile page, Edit profile, Change password, Address management | Logged in |
+| 3 | Product | Feature_Product | Marketplace page, Product detail, Search, Filter, Reviews | Browser opened |
+| 4 | Cart & Order | Feature_Order | Cart page, Preview order, Checkout flow, Order history | Logged in as Customer |
+| 5 | Inventory | Feature_Inventory | Inventory management panel (Staff/Admin) | Logged in as Staff/Admin |
+| 6 | Vendor | Feature_Vendor | Vendor registration form, Vendor dashboard, Vendor profile | Browser opened / Logged in as Vendor |
+| 7 | Payment & Wallet | Feature_Payment | PayOS payment flow, Wallet page, Cashout request | Logged in as Vendor |
+| 8 | Farm & Crop | Feature_Farm | Create farm page, Farm list, Farm detail, Crop management | Logged in |
+| 9 | Forum | Feature_Forum | Forum page, Create post, Post detail, Comments | Logged in |
+| 10 | Notification | Feature_Notification | Notification bell, Notification list, Mark as read | Logged in |
+| 11 | Request & Support | Feature_Request | Ticket page, Create ticket, View ticket status | Logged in |
+| 12 | Chatbot | Feature_Chatbot | Chat page, Send message, Chat history | Logged in |
+| 13 | Dashboard | Feature_Dashboard | Admin dashboard, Staff dashboard, Analytics | Logged in as Admin/Staff |
+| 14 | Product Registration | Feature_ProductReg | Register product page (Vendor), Product management | Logged in as Vendor |
+| 15 | Certificate | Feature_Certificate | Upload certificates, View certificates, Approval status | Logged in as Vendor/Admin |
 
 ---
 
@@ -43,38 +57,38 @@ This document provides guidance for writing Test Reports for VerdantTech Solutio
 
 | No | Feature | Test Cases |
 |----|---------|------------|
-| 1 | Authentication | 7 |
-| 2 | User Management | 6 |
+| 1 | Authentication | 8 |
+| 2 | User Management | 7 |
 | 3 | Product | 6 |
 | 4 | Cart & Order | 7 |
-| 5 | Inventory | 6 |
+| 5 | Inventory | 5 |
 | 6 | Vendor | 6 |
-| 7 | Payment & Wallet | 6 |
+| 7 | Payment & Wallet | 5 |
 | 8 | Farm & Crop | 5 |
 | 9 | Forum | 6 |
-| 10 | Notification | 5 |
+| 10 | Notification | 4 |
 | 11 | Request & Support | 5 |
 | 12 | Chatbot | 5 |
-| 13 | Dashboard | 5 |
-| 14 | Product Registration | 6 |
-| 15 | Certificate | 5 |
+| 13 | Dashboard | 4 |
+| 14 | Product Registration | 5 |
+| 15 | Certificate | 4 |
 
-**Total: ~86 Test Cases**
+**Total: ~82 Test Cases**
 
 ---
 
 ## How to Fill Test Cases Tab
 
 ### Step 1: Fill header information
-- **Project Name**: VerdantTech Solutions Backend
-- **Project Code**: VTS-BE
+- **Project Name**: VerdantTech Solutions Frontend
+- **Project Code**: VTS-FE
 - **Test Environment Setup Description**:
   ```
-  1. Server: .NET 8 Runtime
-  2. Database: MySQL 8.x
-  3. Web Browser: Chrome/Edge (for Swagger)
-  4. Tools: Postman, Swagger UI
-  5. Test Account: admin@gmail.com / 123456
+  1. Browser: Chrome/Edge (latest)
+  2. Screen: 1920x1080
+  3. URL: http://localhost:5173
+  4. Test Account: customer@gmail.com / 123456
+  5. Tools: Chrome DevTools, Network tab
   ```
 
 ### Step 2: Fill Function List table
@@ -85,14 +99,48 @@ Create 15 sheets with names from the "Sheet Name" column above.
 
 ---
 
+## UI Testing Types
+
+### 1. Form Validation Testing
+- Empty field submission
+- Invalid data format (email, phone)
+- Password mismatch
+- Required field validation
+- Error message display
+
+### 2. Navigation Testing
+- Page routing
+- Back/Forward button
+- Breadcrumb navigation
+- Menu navigation
+
+### 3. User Interaction Testing
+- Button click actions
+- Form input behavior
+- Dropdown selection
+- Modal/Dialog behavior
+
+### 4. Visual Testing
+- Loading states (spinner)
+- Error states
+- Success states
+- Toast notifications
+
+### 5. Responsive Testing
+- Desktop layout
+- Mobile layout
+- Element visibility
+
+---
+
 ## Feature Sheet Structure
 
 ### Header for each sheet:
 | Field | Value |
 |-------|-------|
 | Feature | [Feature Name] |
-| Test requirement | [Test requirement description] |
-| Number of TCs | [5-7] |
+| Test requirement | UI design available, Frontend deployed |
+| Number of TCs | [4-8] |
 
 ### Testing Round table:
 | Testing Round | Passed | Failed | Pending | N/A |
@@ -109,50 +157,67 @@ Create 15 sheets with names from the "Sheet Name" column above.
 
 ## Test Case ID Naming Convention
 
-Format: `[Feature Code]_[Number]`
+Format: `[Feature Code][Number]`
 
 | Feature | Code | Example |
 |---------|------|---------|
-| Authentication | AUTH | AUTH_001 - AUTH_007 |
-| User Management | USER | USER_001 - USER_006 |
-| Product | PROD | PROD_001 - PROD_006 |
-| Cart & Order | ORD | ORD_001 - ORD_007 |
-| Inventory | INV | INV_001 - INV_006 |
-| Vendor | VEND | VEND_001 - VEND_006 |
-| Payment & Wallet | PAY | PAY_001 - PAY_006 |
-| Farm & Crop | FARM | FARM_001 - FARM_005 |
-| Forum | FORUM | FORUM_001 - FORUM_006 |
-| Notification | NOTI | NOTI_001 - NOTI_005 |
-| Request & Support | REQ | REQ_001 - REQ_005 |
-| Chatbot | CHAT | CHAT_001 - CHAT_005 |
-| Dashboard | DASH | DASH_001 - DASH_005 |
-| Product Registration | PREG | PREG_001 - PREG_006 |
-| Certificate | CERT | CERT_001 - CERT_005 |
+| Authentication | AUTH | AUTH01 - AUTH08 |
+| User Management | USER | USER01 - USER07 |
+| Product | PROD | PROD01 - PROD06 |
+| Cart & Order | ORD | ORD01 - ORD07 |
+| Inventory | INV | INV01 - INV05 |
+| Vendor | VEND | VEND01 - VEND06 |
+| Payment & Wallet | PAY | PAY01 - PAY05 |
+| Farm & Crop | FARM | FARM01 - FARM05 |
+| Forum | FORUM | FORUM01 - FORUM06 |
+| Notification | NOTI | NOTI01 - NOTI04 |
+| Request & Support | REQ | REQ01 - REQ05 |
+| Chatbot | CHAT | CHAT01 - CHAT05 |
+| Dashboard | DASH | DASH01 - DASH04 |
+| Product Registration | PREG | PREG01 - PREG05 |
+| Certificate | CERT | CERT01 - CERT04 |
 
 ---
 
-## Test Case Selection Principles (5-7 TC/feature)
+## UI Test Case Selection Principles (4-8 TC/feature)
 
-Select the most important test types for each feature:
+Select the most important UI test types for each feature:
 
-1. **Happy Path** (1-2 TC) - Test main success flow
-2. **Validation** (1-2 TC) - Test invalid data  
-3. **Auth/Permission** (1 TC) - Test access control
-4. **Not Found** (1 TC) - Test non-existent ID
-5. **Business Logic** (1 TC) - Test business constraints
+1. **Happy Path** (1-2 TC) - Test main success flow on UI
+2. **Validation** (1-2 TC) - Test invalid input, error messages
+3. **Edge Cases** (1 TC) - Empty state, boundary values
+4. **Navigation** (1 TC) - Page routing, redirects
+5. **Visual Feedback** (1 TC) - Loading, success/error messages
 
 ---
 
 ## Next Steps
 
-After completing the Test Cases tab, let me know to create detailed 5-7 test cases for each Feature.
+After completing the Test Cases tab, see the detailed UI test cases for each Feature in corresponding files.
 
 **Priority order:**
-1. ⭐ Authentication
-2. ⭐ User Management  
-3. ⭐ Product
-4. ⭐ Cart & Order
+1. ⭐ Authentication (Login, SignUp, ForgotPassword pages)
+2. ⭐ User Management (Profile page)
+3. ⭐ Product (Marketplace, ProductDetail pages)
+4. ⭐ Cart & Order (Cart, PreviewOrder pages)
 5. Remaining features
+
+---
+
+## Main Pages to Test
+
+| Page | URL | Components |
+|------|-----|------------|
+| Login | /login | Email input, Password input, Login button, Google login |
+| Sign Up | /signup | Full name, Email, Phone, Password, Confirm password |
+| Forgot Password | /forgot-password | Email input, Send button |
+| Profile | /profile | Avatar, User info, Edit form, Address list |
+| Marketplace | /marketplace | Product grid, Search, Filter, Pagination |
+| Product Detail | /product/:id | Image gallery, Price, Quantity, Add to cart |
+| Cart | /cart | Item list, Quantity controls, Remove, Total |
+| Forum | /forum | Post list, Create post form, Categories |
+| Chat | /chat | Message list, Input, Send button, History |
+| Vendor Dashboard | /vendor | Stats cards, Activity list, Charts |
 
 ---
 
@@ -164,4 +229,8 @@ After completing the Test Cases tab, let me know to create detailed 5-7 test cas
   - 1 Test Statistics sheet
   - 15 Feature sheets
   
-- Total Test Cases: **~86 test cases**
+- Total Test Cases: **~82 test cases**
+
+- Focus on **user-facing interactions** not API calls
+- Test both **success** and **error** scenarios on UI
+- Include **visual feedback** (loading, toast messages)

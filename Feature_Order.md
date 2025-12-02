@@ -1,65 +1,47 @@
-# Feature_Order - Cart & Order Test Cases
+# Feature_Order - Cart & Order UI Test Cases
 
 ## Sheet Information
 
 | Field | Value |
 |-------|-------|
 | **Feature** | Cart & Order |
-| **Test requirement** | API and design are available |
-| **Number of TCs** | 18 |
+| **Test requirement** | Cart page, Preview order page available |
+| **Number of TCs** | 7 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 18 | 0 |
-| Round 2 | 0 | 0 | 18 | 0 |
-| Round 3 | 0 | 0 | 18 | 0 |
+| Round 1 | 0 | 0 | 7 | 0 |
+| Round 2 | 0 | 0 | 7 | 0 |
+| Round 3 | 0 | 0 | 7 | 0 |
 
 ---
 
 ## Test Cases
 
-### Shopping Cart
+### Add to Cart (from Product Detail)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| ORD01 | Add product to cart | 1. Login as Customer<br>2. Call POST `/api/Cart/add`<br>3. Send productId and quantity | - Product added to cart<br>- Cart total updated<br>- Status 201 Created | Logged in, product exists |
-| ORD02 | Add product with insufficient stock | 1. Login as Customer<br>2. Call POST `/api/Cart/add`<br>3. Send quantity > available stock | - Error message displayed<br>- Status 400 Bad Request | Product with low stock |
-| ORD03 | Update cart item quantity | 1. Login as Customer<br>2. Call PUT `/api/Cart/update`<br>3. Send new quantity | - Quantity updated<br>- Cart total recalculated<br>- Status 200 OK | Item in cart |
-| ORD04 | Remove item from cart (quantity=0) | 1. Login as Customer<br>2. Call PUT `/api/Cart/update`<br>3. Send quantity = 0 | - Item removed from cart<br>- Status 200 OK | Item in cart |
-| ORD05 | Get user cart | 1. Login as Customer<br>2. Call GET `/api/Cart` | - Cart items displayed<br>- Total price calculated<br>- Status 200 OK | Logged in |
-| ORD06 | Get empty cart | 1. Login as new Customer<br>2. Call GET `/api/Cart` | - Empty cart message<br>- cartItems = []<br>- Status 200 OK | Logged in, no items |
+| ORD01 | Add product to cart | 1. Login as customer<br>2. Go to product detail page<br>3. Set quantity = 2<br>4. Click "Thêm vào giỏ hàng" | - Loading spinner on button<br>- Success toast "Thêm vào giỏ hàng thành công!"<br>- Cart icon badge updates (+2)<br>- "Xem giỏ hàng →" link in toast | Logged in, product in stock |
+| ORD02 | Add to cart without login | 1. Logout if logged in<br>2. Go to product detail page<br>3. Click "Thêm vào giỏ hàng" | - Error toast "Vui lòng đăng nhập"<br>- Redirect to /login after 2 seconds | Not logged in |
 
 ---
 
-### Order Creation
+### Cart Page (/cart)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| ORD07 | Create order preview | 1. Login as Customer<br>2. Call POST `/api/Order/preview`<br>3. Send cart items and shipping address | - Preview created with shipping options<br>- Shipping fee calculated<br>- Status 201 Created | Items in cart, valid address |
-| ORD08 | Create order from preview | 1. Have valid order preview<br>2. Call POST `/api/Order/{orderPreviewId}`<br>3. Select shipping service | - Order created with status Pending<br>- Status 201 Created | Valid preview exists |
-| ORD09 | Create order with invalid preview | 1. Call POST `/api/Order/{invalidGuid}`<br>2. Send order data | - Error: Preview not found<br>- Status 404 Not Found | None |
+| ORD03 | View cart items | 1. Login and add items to cart<br>2. Navigate to /cart | - Cart page loads<br>- Product list with: image, name, price, quantity<br>- Subtotal calculated correctly<br>- "Xem trước đơn hàng" button visible | Cart has items |
+| ORD04 | Update item quantity | 1. Go to /cart<br>2. Click "+" to increase quantity<br>3. Click "-" to decrease quantity | - Quantity updates<br>- Subtotal recalculates<br>- Spinner shows during update | Cart has items |
+| ORD05 | Remove item from cart | 1. Go to /cart<br>2. Click trash icon on an item<br>3. Confirm deletion in dialog | - Confirmation dialog shows<br>- Item removed from list<br>- Total recalculates<br>- "Giỏ hàng đang trống" if last item | Cart has items |
 
 ---
 
-### Order Management
+### Preview Order Page (/preview-order)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| ORD10 | Get order by ID | 1. Login<br>2. Call GET `/api/Order/{orderId}` | - Order details returned<br>- Includes items, status, shipping<br>- Status 200 OK | Order exists |
-| ORD11 | Get all orders (Admin/Staff) | 1. Login as Admin/Staff<br>2. Call GET `/api/Order?page=1&pageSize=10` | - List of all orders<br>- Pagination info<br>- Status 200 OK | Logged in as Admin/Staff |
-| ORD12 | Get orders by status filter | 1. Login as Admin/Staff<br>2. Call GET `/api/Order?status=Pending` | - Only Pending orders returned | Orders exist |
-| ORD13 | Get user's orders | 1. Login as Customer<br>2. Call GET `/api/Order/user/{userId}` | - Only user's orders returned | User has orders |
-
----
-
-### Order Processing
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| ORD14 | Ship order (assign serials) | 1. Login as Admin/Staff<br>2. Call POST `/api/Order/{orderId}/ship`<br>3. Send serial/batch numbers | - Order status = Shipped<br>- Serials assigned<br>- Status 200 OK | Order status = Paid |
-| ORD15 | Update order status to Delivered | 1. Login as Admin/Staff<br>2. Call PUT `/api/Order/{orderId}`<br>3. Send status = Delivered | - Order status updated<br>- Status 200 OK | Order status = Shipped |
-| ORD16 | Cancel order (by Customer) | 1. Login as Customer<br>2. Call PUT `/api/Order/{orderId}`<br>3. Send status = Cancelled with reason | - Order cancelled<br>- Status 200 OK | Order status = Pending |
-| ORD17 | Cancel paid order (not allowed) | 1. Login as Customer<br>2. Call PUT `/api/Order/{orderId}` on Paid order<br>3. Send status = Cancelled | - Error: Cannot cancel paid order<br>- Status 400 Bad Request | Order status = Paid |
-| ORD18 | Process refund | 1. Login as Admin/Staff<br>2. Call PUT `/api/Order/{orderId}`<br>3. Send status = Refunded | - Order refunded<br>- Status 200 OK | Order eligible for refund |
+| ORD06 | Preview order before checkout | 1. Go to /cart with items<br>2. Click "Xem trước đơn hàng" | - Navigate to /preview-order<br>- Order summary shows<br>- Delivery address selection<br>- Payment method options<br>- Total amount displayed | Cart has items |
+| ORD07 | Empty cart state | 1. Remove all items from cart<br>2. View cart page | - "Giỏ hàng đang trống" message<br>- Empty cart icon shows<br>- "Tiếp tục mua sắm" button visible<br>- Checkout button disabled | Empty cart |

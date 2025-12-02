@@ -1,48 +1,31 @@
-# Feature_Chatbot - Chatbot Test Cases
+# Feature_Chatbot - Chatbot UI Test Cases
 
 ## Sheet Information
 
 | Field | Value |
 |-------|-------|
 | **Feature** | Chatbot |
-| **Test requirement** | API and design are available |
-| **Number of TCs** | 8 |
+| **Test requirement** | Chat page available |
+| **Number of TCs** | 5 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 8 | 0 |
-| Round 2 | 0 | 0 | 8 | 0 |
-| Round 3 | 0 | 0 | 8 | 0 |
+| Round 1 | 0 | 0 | 5 | 0 |
+| Round 2 | 0 | 0 | 5 | 0 |
+| Round 3 | 0 | 0 | 5 | 0 |
 
 ---
 
 ## Test Cases
 
-### Conversation Management
+### Chat Page (/chat)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| CHAT01 | Create new conversation | 1. Login<br>2. Call POST `/api/ChatbotConversation`<br>3. Send first message | - Conversation created<br>- First message saved<br>- AI response generated<br>- Status 201 Created | Logged in |
-| CHAT02 | Get all conversations | 1. Login<br>2. Call GET `/api/ChatbotConversation?page=1&pageSize=10` | - List of user's conversations<br>- Ordered by recent<br>- Status 200 OK | Logged in |
-| CHAT03 | Update conversation | 1. Login<br>2. Call PATCH `/api/ChatbotConversation/{conversationId}`<br>3. Update title or is_active | - Conversation updated<br>- Status 200 OK | Conversation exists |
-
----
-
-### Message Management
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| CHAT04 | Send message to existing conversation | 1. Login<br>2. Call POST `/api/ChatbotConversation/{conversationId}/message`<br>3. Send message content | - Message saved<br>- AI response generated<br>- Status 201 Created | Conversation exists |
-| CHAT05 | Get messages in conversation | 1. Login<br>2. Call GET `/api/ChatbotConversation/{conversationId}/messages?page=1` | - List of messages returned<br>- Ordered chronologically<br>- Status 200 OK | Conversation with messages |
-| CHAT06 | Send empty message | 1. Login<br>2. Call POST `/api/ChatbotConversation/{conversationId}/message`<br>3. Send empty content | - Validation error<br>- Status 400 Bad Request | Conversation exists |
-
----
-
-### Edge Cases
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| CHAT07 | Access other user's conversation | 1. Login as User A<br>2. Try to send message to User B's conversation | - Error: Unauthorized<br>- Status 403 Forbidden | Different user's conversation |
-| CHAT08 | Send message to inactive conversation | 1. Login<br>2. Conversation is_active = false<br>3. Try to send message | - Error or reactivate conversation<br>- Behavior as designed | Inactive conversation |
+| CHAT01 | Open chat page | 1. Login<br>2. Navigate to /chat | - Chat page loads<br>- Sidebar with conversation history<br>- Main chat area<br>- Welcome message from AI<br>- Input field at bottom | Logged in |
+| CHAT02 | Send message to chatbot | 1. Go to /chat<br>2. Type "Xin chào" in input<br>3. Press Enter or click Send | - User message appears in chat<br>- Typing indicator shows<br>- AI response appears after delay<br>- Scroll to bottom | Chat page opened |
+| CHAT03 | Use suggested question | 1. Go to /chat (new conversation)<br>2. Click on a suggested question button | - Question fills in input or sends directly<br>- AI responds to the question<br>- Suggested questions may hide after first message | New conversation |
+| CHAT04 | Create new conversation | 1. Go to /chat<br>2. Click "Tạo cuộc trò chuyện mới" in sidebar | - New conversation created<br>- Chat area clears<br>- Welcome message shows<br>- New conversation in sidebar list | Logged in |
+| CHAT05 | View chat history | 1. Go to /chat<br>2. Click on previous conversation in sidebar | - Selected conversation loads<br>- Previous messages displayed<br>- Can continue chatting<br>- Active conversation highlighted | Has previous conversations |

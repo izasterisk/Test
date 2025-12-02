@@ -1,55 +1,37 @@
-# Feature_Dashboard - Dashboard Test Cases
+# Feature_Dashboard - Dashboard UI Test Cases
 
 ## Sheet Information
 
 | Field | Value |
 |-------|-------|
 | **Feature** | Dashboard |
-| **Test requirement** | API and design are available |
-| **Number of TCs** | 8 |
+| **Test requirement** | Admin/Staff dashboard pages available |
+| **Number of TCs** | 4 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 8 | 0 |
-| Round 2 | 0 | 0 | 8 | 0 |
-| Round 3 | 0 | 0 | 8 | 0 |
+| Round 1 | 0 | 0 | 4 | 0 |
+| Round 2 | 0 | 0 | 4 | 0 |
+| Round 3 | 0 | 0 | 4 | 0 |
 
 ---
 
 ## Test Cases
 
-### Revenue Statistics
+### Admin Dashboard (/admin)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| DASH01 | Get revenue by time range | 1. Login as Admin/Staff<br>2. Call GET `/api/Dashboard/revenue?from=2024-01-01&to=2024-12-31` | - Total revenue returned<br>- Status 200 OK | Logged in as Admin/Staff |
-| DASH02 | Get revenue last 7 days | 1. Login as Admin/Staff<br>2. Call GET `/api/Dashboard/revenue/last-7-days` | - Daily revenue for 7 days<br>- Includes today<br>- Status 200 OK | Logged in as Admin/Staff |
-| DASH03 | Get revenue with invalid date range | 1. Login as Admin/Staff<br>2. Call GET `/api/Dashboard/revenue?from=2024-12-31&to=2024-01-01` | - Error or empty result<br>- Handled gracefully | Logged in as Admin/Staff |
+| DASH01 | View admin dashboard | 1. Login as Admin<br>2. Navigate to /admin | - Dashboard page loads<br>- Overview stats cards visible<br>- Charts/graphs display<br>- Sidebar navigation works<br>- Recent activity section | Logged in as Admin |
+| DASH02 | Navigate admin panels | 1. On Admin dashboard<br>2. Click "Quản lý người dùng" in sidebar<br>3. Click "Quản lý sản phẩm"<br>4. Click "Quản lý đơn hàng" | - Each panel loads correctly<br>- Active menu highlighted<br>- Panel content changes<br>- Breadcrumb updates (if any) | Logged in as Admin |
 
 ---
 
-### Order Statistics
+### Staff Dashboard (/staff)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| DASH04 | Get order statistics by time range | 1. Login as Admin/Staff<br>2. Call GET `/api/Dashboard/orders?from=2024-01-01&to=2024-12-31` | - Order counts by status<br>- Paid, Shipped, Delivered, Cancelled, Refunded<br>- Status 200 OK | Logged in as Admin/Staff |
-| DASH05 | Get order statistics with no data | 1. Login as Admin/Staff<br>2. Query date range with no orders | - Zero counts returned<br>- Status 200 OK | Logged in as Admin/Staff |
-
----
-
-### Queue Statistics
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| DASH06 | Get queue statistics | 1. Login as Admin/Staff<br>2. Call GET `/api/Dashboard/queues` | - Pending counts for:<br>  • Unverified vendors<br>  • Product registrations<br>  • Certificates<br>  • Requests<br>- Status 200 OK | Logged in as Admin/Staff |
-
----
-
-### Authorization
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| DASH07 | Customer access dashboard | 1. Login as Customer<br>2. Call GET `/api/Dashboard/revenue` | - Error: Access denied<br>- Status 403 Forbidden | Logged in as Customer |
-| DASH08 | Unauthenticated access dashboard | 1. No login<br>2. Call GET `/api/Dashboard/queues` | - Error: Unauthorized<br>- Status 401 Unauthorized | Not logged in |
+| DASH03 | View staff dashboard | 1. Login as Staff<br>2. Navigate to /staff | - Dashboard page loads<br>- Assigned tasks/stats shown<br>- Limited menu compared to Admin<br>- Can access allowed panels only | Logged in as Staff |
+| DASH04 | Access unauthorized admin page | 1. Login as Staff<br>2. Try to access /admin directly | - Access denied or redirect<br>- Error message or redirect to /staff<br>- Cannot see admin-only features | Logged in as Staff |
