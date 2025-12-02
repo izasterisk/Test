@@ -1,132 +1,61 @@
-# Feature 5: Inventory Management - UI Test Cases
+# Feature_Inventory - Inventory Management UI Test Cases
 
 ## Sheet Information
+
 | Field | Value |
 |-------|-------|
-| **Sheet Name** | TC_Inventory |
 | **Feature** | Inventory Management |
-| **Module** | Admin/Staff Panel - Batch & Export Inventory |
-| **Total Test Cases** | 14 |
-| **Testing Type** | UI Functional Testing |
+| **Test requirement** | Admin/Staff Inventory Panel available |
+| **Number of TCs** | 14 |
+
+## Testing Round Summary
+
+| Testing Round | Passed | Failed | Pending | N/A |
+|---------------|--------|--------|---------|-----|
+| Round 1 | 0 | 0 | 14 | 0 |
+| Round 2 | 0 | 0 | 14 | 0 |
+| Round 3 | 0 | 0 | 14 | 0 |
 
 ---
 
 ## Test Cases
 
-### 5.1 Batch Inventory List
+### Batch Inventory List
 
-| TC ID | TC_INV_001 |
-|-------|------------|
-| **Description** | Verify Batch Inventory page displays correctly |
-| **Pre-conditions** | User logged in as Admin/Staff |
-| **Procedure** | 1. Navigate to Inventory Management<br>2. Click on "Batch Inventory" menu<br>3. Observe the page layout |
-| **Expected Results** | - Page displays batch inventory table<br>- Table shows columns: ID, Product, Quantity, Import Date, Expiry, Status<br>- Pagination controls visible<br>- Search and filter options available |
-
-| TC ID | TC_INV_002 |
-|-------|------------|
-| **Description** | Verify batch inventory search functionality |
-| **Pre-conditions** | User on Batch Inventory page, data exists |
-| **Procedure** | 1. Locate the search input field<br>2. Type a product name or batch ID<br>3. Press Enter or click search button |
-| **Expected Results** | - Search results update in real-time<br>- Table filters to show matching batches only<br>- "No results found" message if no match<br>- Clear search restores full list |
-
-| TC ID | TC_INV_003 |
-|-------|------------|
-| **Description** | Verify filter by status functionality |
-| **Pre-conditions** | User on Batch Inventory page |
-| **Procedure** | 1. Click on Status filter dropdown<br>2. Select "Active" status<br>3. Observe filtered results<br>4. Select "Expired" status |
-| **Expected Results** | - Filter dropdown shows all status options<br>- Table updates to show only selected status<br>- Count indicator shows filtered results<br>- Filter can be cleared |
-
-### 5.2 Create New Batch
-
-| TC ID | TC_INV_004 |
-|-------|------------|
-| **Description** | Verify Create Batch form displays correctly |
-| **Pre-conditions** | User on Batch Inventory page as Admin/Staff |
-| **Procedure** | 1. Click "Add New Batch" or "+" button<br>2. Observe the form/modal that appears |
-| **Expected Results** | - Form modal opens with animation<br>- Required fields marked with asterisk (*)<br>- Fields: Product select, Quantity, Import Date, Expiry Date, Notes<br>- Save and Cancel buttons visible |
-
-| TC ID | TC_INV_005 |
-|-------|------------|
-| **Description** | Verify batch creation with valid data |
-| **Pre-conditions** | Create Batch form is open |
-| **Procedure** | 1. Select a product from dropdown<br>2. Enter quantity: 100<br>3. Select import date: today<br>4. Select expiry date: 6 months from now<br>5. Click "Save" button |
-| **Expected Results** | - Form validates successfully<br>- Loading indicator during submission<br>- Success toast: "Batch created successfully"<br>- Modal closes<br>- New batch appears in table |
-
-| TC ID | TC_INV_006 |
-|-------|------------|
-| **Description** | Verify batch creation validation - empty fields |
-| **Pre-conditions** | Create Batch form is open |
-| **Procedure** | 1. Leave all fields empty<br>2. Click "Save" button |
-| **Expected Results** | - Form shows validation errors<br>- Product field: "Product is required"<br>- Quantity field: "Quantity is required"<br>- Import Date: "Import date is required"<br>- Save button disabled or form not submitted |
-
-| TC ID | TC_INV_007 |
-|-------|------------|
-| **Description** | Verify batch creation - invalid quantity |
-| **Pre-conditions** | Create Batch form is open |
-| **Procedure** | 1. Select a product<br>2. Enter quantity: -50<br>3. Try to submit |
-| **Expected Results** | - Validation error: "Quantity must be positive"<br>- Form does not submit<br>- Error highlighted on quantity field |
-
-### 5.3 Edit Batch
-
-| TC ID | TC_INV_008 |
-|-------|------------|
-| **Description** | Verify edit batch functionality |
-| **Pre-conditions** | Batch inventory list has data |
-| **Procedure** | 1. Click edit icon/button on a batch row<br>2. Edit form opens with pre-filled data<br>3. Modify quantity from 100 to 150<br>4. Click "Update" button |
-| **Expected Results** | - Edit form shows current batch data<br>- Fields are editable<br>- Success toast: "Batch updated successfully"<br>- Table reflects updated quantity |
-
-### 5.4 Export Inventory
-
-| TC ID | TC_INV_009 |
-|-------|------------|
-| **Description** | Verify Export Inventory page layout |
-| **Pre-conditions** | User logged in as Admin/Staff |
-| **Procedure** | 1. Navigate to Inventory Management<br>2. Click on "Export Inventory" menu<br>3. Observe the page |
-| **Expected Results** | - Page displays export history table<br>- Columns: ID, Product, Quantity, Export Date, Destination, Status<br>- "New Export" button visible<br>- Filter and search options available |
-
-| TC ID | TC_INV_010 |
-|-------|------------|
-| **Description** | Verify create export record with valid data |
-| **Pre-conditions** | User on Export Inventory page |
-| **Procedure** | 1. Click "New Export" button<br>2. Select product from available batches<br>3. Enter export quantity: 50<br>4. Enter destination/reason<br>5. Click "Confirm Export" |
-| **Expected Results** | - Modal form opens<br>- Batch selection shows available quantity<br>- Export quantity validated against available<br>- Success: "Export recorded successfully"<br>- Batch quantity updated |
-
-| TC ID | TC_INV_011 |
-|-------|------------|
-| **Description** | Verify export validation - exceeds available quantity |
-| **Pre-conditions** | Export form open, batch has 100 units |
-| **Procedure** | 1. Select batch with 100 available units<br>2. Enter export quantity: 150<br>3. Try to submit |
-| **Expected Results** | - Validation error: "Export quantity exceeds available (100)"<br>- Form does not submit<br>- Available quantity displayed for reference |
-
-### 5.5 Inventory Reports
-
-| TC ID | TC_INV_012 |
-|-------|------------|
-| **Description** | Verify inventory low stock warning display |
-| **Pre-conditions** | Some products have low stock |
-| **Procedure** | 1. Navigate to Inventory dashboard<br>2. Look for low stock indicators |
-| **Expected Results** | - Low stock items highlighted in red/orange<br>- Warning badge shows count of low stock items<br>- Tooltip shows threshold information<br>- Click navigates to low stock filter |
-
-| TC ID | TC_INV_013 |
-|-------|------------|
-| **Description** | Verify expiring soon filter functionality |
-| **Pre-conditions** | Some batches expiring within 30 days |
-| **Procedure** | 1. Click "Expiring Soon" filter/tab<br>2. Observe filtered results |
-| **Expected Results** | - Table shows only batches expiring within threshold<br>- Expiry date highlighted in warning color<br>- Days until expiry calculated and shown<br>- Can export list for review |
-
-| TC ID | TC_INV_014 |
-|-------|------------|
-| **Description** | Verify pagination in batch inventory table |
-| **Pre-conditions** | More than 10 batch records exist |
-| **Procedure** | 1. Observe pagination controls at table bottom<br>2. Click page 2<br>3. Click "Next" button<br>4. Change items per page to 25 |
-| **Expected Results** | - Pagination shows current page and total<br>- Navigation buttons work correctly<br>- Items per page selector functions<br>- Table updates without full page reload |
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| INV01 | View batch inventory page | 1. Login as Admin/Staff<br>2. Navigate to Inventory Management<br>3. Click "Batch Inventory" | - Batch table displays<br>- Columns: ID, Product, Quantity, Import Date, Expiry, Status<br>- Pagination visible<br>- Search and filter available | Logged in as Admin/Staff |
+| INV02 | Search batch inventory | 1. On batch inventory page<br>2. Type product name in search<br>3. Press Enter | - Results filter by search term<br>- Matching batches shown<br>- "Không tìm thấy" if no match | Batch data exists |
+| INV03 | Filter by status | 1. On batch inventory page<br>2. Click Status dropdown<br>3. Select "Hết hạn" (Expired) | - Table shows expired batches only<br>- Status badge shows filtered<br>- Clear filter available | Batch data exists |
 
 ---
 
-## Summary
-| Status | Count |
-|--------|-------|
-| Total Test Cases | 14 |
-| Priority - High | 6 |
-| Priority - Medium | 6 |
-| Priority - Low | 2 |
+### Create New Batch
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| INV04 | Open create batch form | 1. On batch inventory page<br>2. Click "Thêm mới" button | - Modal/form opens<br>- Fields: Product, Quantity, Import Date, Expiry<br>- Required fields marked (*) | Admin/Staff logged in |
+| INV05 | Create batch - valid data | 1. Open create batch form<br>2. Select Product from dropdown<br>3. Enter Quantity: 100<br>4. Select Import Date: today<br>5. Select Expiry: +6 months<br>6. Click "Lưu" | - Loading shows<br>- Success toast "Tạo lô hàng thành công"<br>- Modal closes<br>- New batch in table | Form open |
+| INV06 | Create batch - empty fields | 1. Open create batch form<br>2. Leave all fields empty<br>3. Click "Lưu" | - Validation errors show<br>- "Sản phẩm là bắt buộc"<br>- "Số lượng là bắt buộc"<br>- Form not submitted | Form open |
+| INV07 | Create batch - negative quantity | 1. Open create batch form<br>2. Select product<br>3. Enter Quantity: -50<br>4. Click "Lưu" | - Validation error "Số lượng phải lớn hơn 0"<br>- Form not submitted | Form open |
+
+---
+
+### Edit & Export Batch
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| INV08 | Edit batch quantity | 1. On batch list<br>2. Click edit icon on a batch<br>3. Change quantity: 100 → 150<br>4. Click "Cập nhật" | - Edit form opens with data<br>- Success toast "Cập nhật thành công"<br>- Table shows new quantity | Batch exists |
+| INV09 | View export inventory page | 1. Navigate to "Export Inventory"<br>2. Observe page | - Export history table<br>- Columns: ID, Product, Qty, Date, Destination<br>- "Xuất kho" button visible | Admin/Staff logged in |
+| INV10 | Create export record | 1. On export inventory<br>2. Click "Xuất kho"<br>3. Select batch, enter qty: 50<br>4. Enter destination<br>5. Click "Xác nhận" | - Export recorded<br>- Success toast<br>- Batch quantity reduced<br>- Export in history | Available batch exists |
+| INV11 | Export exceeds available | 1. Open export form<br>2. Select batch with 100 units<br>3. Enter qty: 150<br>4. Click "Xác nhận" | - Error "Số lượng xuất vượt quá tồn kho (100)"<br>- Form not submitted | Batch with limited stock |
+
+---
+
+### Inventory Alerts
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| INV12 | View low stock warning | 1. Navigate to inventory dashboard<br>2. Check low stock section | - Low stock items highlighted<br>- Warning badge with count<br>- Red/orange indicator | Products with low stock |
+| INV13 | Filter expiring soon | 1. On batch inventory<br>2. Click "Sắp hết hạn" filter | - Shows batches expiring in 30 days<br>- Expiry date in warning color<br>- Days remaining shown | Batches near expiry |
+| INV14 | Pagination in batch list | 1. On batch inventory (>10 records)<br>2. Click page 2<br>3. Change items per page to 25 | - Page 2 data loads<br>- Items per page updates<br>- Current page indicator | >10 batch records |

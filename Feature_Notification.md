@@ -1,116 +1,59 @@
-# Feature 10: Notification System - UI Test Cases
+# Feature_Notification - Notification UI Test Cases
 
 ## Sheet Information
+
 | Field | Value |
 |-------|-------|
-| **Sheet Name** | TC_Notification |
 | **Feature** | Notification System |
-| **Module** | Notifications, Alerts, Real-time Updates |
-| **Total Test Cases** | 12 |
-| **Testing Type** | UI Functional Testing |
+| **Test requirement** | Notification Bell, List, Real-time Updates available |
+| **Number of TCs** | 12 |
+
+## Testing Round Summary
+
+| Testing Round | Passed | Failed | Pending | N/A |
+|---------------|--------|--------|---------|-----|
+| Round 1 | 0 | 0 | 12 | 0 |
+| Round 2 | 0 | 0 | 12 | 0 |
+| Round 3 | 0 | 0 | 12 | 0 |
 
 ---
 
 ## Test Cases
 
-### 10.1 Notification Bell Icon
+### Notification Bell Icon
 
-| TC ID | TC_NTF_001 |
-|-------|------------|
-| **Description** | Verify notification bell icon in header |
-| **Pre-conditions** | User logged in |
-| **Procedure** | 1. Observe the navigation header<br>2. Locate notification bell icon |
-| **Expected Results** | - Bell icon visible in header/navbar<br>- Icon positioned consistently (typically right side)<br>- Click area is appropriately sized<br>- Icon matches design system |
-
-| TC ID | TC_NTF_002 |
-|-------|------------|
-| **Description** | Verify unread notification badge count |
-| **Pre-conditions** | User has unread notifications |
-| **Procedure** | 1. Observe notification bell icon<br>2. Check for badge/counter |
-| **Expected Results** | - Red badge shows unread count<br>- Badge shows number (e.g., "5")<br>- "99+" shown if count exceeds 99<br>- Badge hidden when count is 0 |
-
-| TC ID | TC_NTF_003 |
-|-------|------------|
-| **Description** | Verify notification badge updates real-time |
-| **Pre-conditions** | User logged in, another action triggers notification |
-| **Procedure** | 1. Note current badge count<br>2. Have another user/action trigger notification<br>3. Observe badge without refresh |
-| **Expected Results** | - Badge count updates automatically<br>- No page refresh needed<br>- New notification animation (optional)<br>- Sound notification (if enabled) |
-
-### 10.2 Notification Dropdown
-
-| TC ID | TC_NTF_004 |
-|-------|------------|
-| **Description** | Verify notification dropdown opens |
-| **Pre-conditions** | User logged in |
-| **Procedure** | 1. Click on notification bell icon<br>2. Observe dropdown panel |
-| **Expected Results** | - Dropdown panel opens below icon<br>- Smooth animation on open<br>- Header shows "Notifications"<br>- List of recent notifications displayed<br>- "View All" or "See More" link |
-
-| TC ID | TC_NTF_005 |
-|-------|------------|
-| **Description** | Verify notification item display |
-| **Pre-conditions** | User has notifications |
-| **Procedure** | 1. Open notification dropdown<br>2. Observe a notification item |
-| **Expected Results** | - Each item shows: Icon/Avatar, Title, Message preview<br>- Timestamp (e.g., "5 min ago", "Yesterday")<br>- Unread items have distinct styling (bold, background)<br>- Read items appear dimmer |
-
-| TC ID | TC_NTF_006 |
-|-------|------------|
-| **Description** | Verify clicking notification navigates correctly |
-| **Pre-conditions** | User has order-related notification |
-| **Procedure** | 1. Open notification dropdown<br>2. Click on an order notification |
-| **Expected Results** | - Dropdown closes<br>- Navigates to related page (order detail)<br>- Notification marked as read<br>- Badge count decrements |
-
-| TC ID | TC_NTF_007 |
-|-------|------------|
-| **Description** | Verify empty notification state |
-| **Pre-conditions** | User has no notifications |
-| **Procedure** | 1. Click notification bell<br>2. Observe empty state |
-| **Expected Results** | - Empty state illustration<br>- Message: "No notifications yet"<br>- Friendly text or icon<br>- Dropdown still functional |
-
-### 10.3 Mark as Read
-
-| TC ID | TC_NTF_008 |
-|-------|------------|
-| **Description** | Verify mark single notification as read |
-| **Pre-conditions** | User has unread notifications |
-| **Procedure** | 1. Open notification dropdown<br>2. Hover over unread notification<br>3. Click "Mark as read" option or checkmark |
-| **Expected Results** | - Notification styling changes to read<br>- Badge count decrements by 1<br>- Action confirmed (subtle animation)<br>- No page reload needed |
-
-| TC ID | TC_NTF_009 |
-|-------|------------|
-| **Description** | Verify "Mark all as read" functionality |
-| **Pre-conditions** | User has multiple unread notifications |
-| **Procedure** | 1. Open notification dropdown<br>2. Click "Mark all as read" button |
-| **Expected Results** | - All notifications styled as read<br>- Badge count becomes 0<br>- Badge hidden or shows 0<br>- Success feedback (optional toast) |
-
-### 10.4 Notification Page
-
-| TC ID | TC_NTF_010 |
-|-------|------------|
-| **Description** | Verify full notifications page |
-| **Pre-conditions** | User logged in |
-| **Procedure** | 1. Click "View All" from dropdown<br>2. Or navigate to /notifications<br>3. Observe full page |
-| **Expected Results** | - Full list of all notifications<br>- Pagination or infinite scroll<br>- Filter options (All, Unread, Read)<br>- Bulk actions available |
-
-| TC ID | TC_NTF_011 |
-|-------|------------|
-| **Description** | Verify notification filter by type |
-| **Pre-conditions** | User on notifications page |
-| **Procedure** | 1. Click filter dropdown<br>2. Select "Orders" type<br>3. Observe filtered list |
-| **Expected Results** | - Filter shows notification types: All, Orders, Messages, System<br>- List filters to selected type<br>- Count updates for filtered results<br>- Clear filter option |
-
-| TC ID | TC_NTF_012 |
-|-------|------------|
-| **Description** | Verify delete/clear notifications |
-| **Pre-conditions** | User has read notifications |
-| **Procedure** | 1. On notifications page<br>2. Click "Clear all read" or delete icon<br>3. Confirm action |
-| **Expected Results** | - Confirmation dialog for bulk delete<br>- After confirm: Read notifications removed<br>- Unread notifications preserved<br>- Success message displayed |
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| NOTI01 | View notification bell | 1. Login<br>2. Observe navbar header | - Bell icon visible in navbar<br>- Position consistent (right side)<br>- Click area sized appropriately<br>- Icon matches design | Logged in |
+| NOTI02 | Unread notification badge | 1. Login (has unread notifications)<br>2. Observe bell icon | - Red badge shows unread count<br>- Badge shows number (e.g., "5")<br>- "99+" if count > 99<br>- Badge hidden when count = 0 | Has unread notifications |
+| NOTI03 | Real-time badge update | 1. Login<br>2. Note badge count<br>3. Trigger new notification (another action)<br>4. Observe without refresh | - Badge count updates auto<br>- No page refresh needed<br>- Animation on new notification<br>- Sound (if enabled) | Logged in |
 
 ---
 
-## Summary
-| Status | Count |
-|--------|-------|
-| Total Test Cases | 12 |
-| Priority - High | 5 |
-| Priority - Medium | 5 |
-| Priority - Low | 2 |
+### Notification Dropdown
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| NOTI04 | Open notification dropdown | 1. Login<br>2. Click bell icon | - Dropdown panel opens<br>- Smooth animation<br>- Header "Thông báo"<br>- Recent notifications listed<br>- "Xem tất cả" link | Logged in |
+| NOTI05 | View notification item | 1. Open notification dropdown<br>2. Observe a notification | - Icon/Avatar shown<br>- Title and preview text<br>- Timestamp (e.g., "5 phút trước")<br>- Unread items bold/highlighted<br>- Read items dimmer | Has notifications |
+| NOTI06 | Click notification to navigate | 1. Open dropdown<br>2. Click order notification | - Dropdown closes<br>- Navigate to related page<br>- Notification marked read<br>- Badge count decrements | Has order notification |
+| NOTI07 | Empty notification state | 1. Login (no notifications)<br>2. Click bell icon | - Empty state illustration<br>- "Chưa có thông báo nào"<br>- Friendly icon<br>- Dropdown functional | No notifications |
+
+---
+
+### Mark as Read
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| NOTI08 | Mark single as read | 1. Open dropdown<br>2. Hover unread notification<br>3. Click "Đánh dấu đã đọc" | - Notification styling changes<br>- Badge count decrements<br>- Subtle animation<br>- No page reload | Has unread |
+| NOTI09 | Mark all as read | 1. Open dropdown<br>2. Click "Đánh dấu tất cả đã đọc" | - All notifications styled as read<br>- Badge count becomes 0<br>- Badge hidden<br>- Success feedback | Multiple unread |
+
+---
+
+### Notification Page
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| NOTI10 | View all notifications page | 1. Click "Xem tất cả" from dropdown<br>2. Or navigate to /notifications | - Full notification list<br>- Pagination or infinite scroll<br>- Filter: Tất cả, Chưa đọc, Đã đọc<br>- Bulk actions available | Logged in |
+| NOTI11 | Filter by type | 1. On notifications page<br>2. Click filter dropdown<br>3. Select "Đơn hàng" | - Filter shows types: Tất cả, Đơn hàng, Tin nhắn, Hệ thống<br>- List filters to type<br>- Count updates<br>- Clear filter option | Has notifications |
+| NOTI12 | Clear/Delete notifications | 1. On notifications page<br>2. Click "Xóa đã đọc"<br>3. Confirm action | - Confirmation dialog<br>- After confirm: Read notifications removed<br>- Unread preserved<br>- Success message | Has read notifications |

@@ -1,132 +1,68 @@
-# Feature 14: Product Registration - UI Test Cases
+# Feature_ProductReg - Product Registration UI Test Cases
 
 ## Sheet Information
+
 | Field | Value |
 |-------|-------|
-| **Sheet Name** | TC_ProductReg |
 | **Feature** | Product Registration |
-| **Module** | Vendor Product Listing, Product Submission |
-| **Total Test Cases** | 14 |
-| **Testing Type** | UI Functional Testing |
+| **Test requirement** | Vendor Product Listing, Submission pages available |
+| **Number of TCs** | 14 |
+
+## Testing Round Summary
+
+| Testing Round | Passed | Failed | Pending | N/A |
+|---------------|--------|--------|---------|-----|
+| Round 1 | 0 | 0 | 14 | 0 |
+| Round 2 | 0 | 0 | 14 | 0 |
+| Round 3 | 0 | 0 | 14 | 0 |
 
 ---
 
 ## Test Cases
 
-### 14.1 Product Registration Form Layout
+### Product Registration Form Layout
 
-| TC ID | TC_PREG_001 |
-|-------|------------|
-| **Description** | Verify product registration form layout |
-| **Pre-conditions** | User logged in as Vendor |
-| **Procedure** | 1. Navigate to "Add New Product"<br>2. Observe the registration form |
-| **Expected Results** | - Multi-section form displayed<br>- Sections: Basic Info, Pricing, Images, Details<br>- Progress indicator (if multi-step)<br>- Required fields marked with asterisk (*)<br>- Save Draft and Submit buttons |
-
-| TC ID | TC_PREG_002 |
-|-------|------------|
-| **Description** | Verify basic info section fields |
-| **Pre-conditions** | User on product registration form |
-| **Procedure** | 1. Observe Basic Info section<br>2. Check available fields |
-| **Expected Results** | - Product Name input<br>- Category dropdown<br>- Subcategory (dynamic based on category)<br>- Short Description textarea<br>- SKU/Product Code (optional) |
-
-### 14.2 Product Images Upload
-
-| TC ID | TC_PREG_003 |
-|-------|------------|
-| **Description** | Verify product image upload area |
-| **Pre-conditions** | User on product registration form |
-| **Procedure** | 1. Locate image upload section<br>2. Observe upload interface |
-| **Expected Results** | - Drag-and-drop area visible<br>- "Click to upload" alternative<br>- Accepted formats shown (JPG, PNG)<br>- Max file size indicated (e.g., 5MB)<br>- Minimum images required noted |
-
-| TC ID | TC_PREG_004 |
-|-------|------------|
-| **Description** | Verify single image upload |
-| **Pre-conditions** | User on image upload section |
-| **Procedure** | 1. Click upload area<br>2. Select a valid image (JPG, 2MB)<br>3. Observe upload process |
-| **Expected Results** | - File dialog opens<br>- Upload progress indicator<br>- Image preview displayed<br>- Delete/Remove option on image<br>- Can upload more images |
-
-| TC ID | TC_PREG_005 |
-|-------|------------|
-| **Description** | Verify multiple images upload |
-| **Pre-conditions** | User on image upload section |
-| **Procedure** | 1. Select 5 images at once<br>2. Observe upload and display |
-| **Expected Results** | - All images upload simultaneously<br>- Progress shown for each<br>- Thumbnails displayed in grid<br>- Can reorder by drag (if supported)<br>- First image marked as primary |
-
-| TC ID | TC_PREG_006 |
-|-------|------------|
-| **Description** | Verify image upload validation |
-| **Pre-conditions** | User on image upload section |
-| **Procedure** | 1. Try to upload PDF file<br>2. Try to upload 10MB image |
-| **Expected Results** | - Invalid format: "Only JPG, PNG allowed"<br>- Oversized file: "File exceeds 5MB limit"<br>- Files rejected<br>- Valid files still accepted |
-
-### 14.3 Pricing & Inventory
-
-| TC ID | TC_PREG_007 |
-|-------|------------|
-| **Description** | Verify pricing section fields |
-| **Pre-conditions** | User on product registration form |
-| **Procedure** | 1. Navigate to Pricing section<br>2. Observe fields |
-| **Expected Results** | - Price input with currency symbol<br>- Compare/Original price (for discounts)<br>- Unit selection (kg, piece, pack)<br>- Stock quantity input<br>- Low stock threshold (optional) |
-
-| TC ID | TC_PREG_008 |
-|-------|------------|
-| **Description** | Verify price validation |
-| **Pre-conditions** | User on pricing section |
-| **Procedure** | 1. Enter price: -1000<br>2. Enter price: 0<br>3. Enter price: "abc" |
-| **Expected Results** | - Negative price: "Price must be positive"<br>- Zero price: Warning or error<br>- Non-numeric: Input rejected or error<br>- Valid positive numbers accepted |
-
-### 14.4 Product Details
-
-| TC ID | TC_PREG_009 |
-|-------|------------|
-| **Description** | Verify product details section |
-| **Pre-conditions** | User on product registration form |
-| **Procedure** | 1. Navigate to Details section<br>2. Observe fields |
-| **Expected Results** | - Full Description (rich text editor)<br>- Weight input<br>- Dimensions (optional)<br>- Origin/Source location<br>- Certifications selection (organic, etc.) |
-
-| TC ID | TC_PREG_010 |
-|-------|------------|
-| **Description** | Verify rich text editor functionality |
-| **Pre-conditions** | User on description field |
-| **Procedure** | 1. Type text in description<br>2. Apply bold formatting<br>3. Create bullet list<br>4. Add a link |
-| **Expected Results** | - Text formatting tools visible<br>- Bold, italic, underline work<br>- Lists can be created<br>- Links can be added<br>- Preview shows formatted text |
-
-### 14.5 Form Submission
-
-| TC ID | TC_PREG_011 |
-|-------|------------|
-| **Description** | Verify submit with valid complete data |
-| **Pre-conditions** | User filled all required fields |
-| **Procedure** | 1. Fill all required fields with valid data<br>2. Upload at least one image<br>3. Click "Submit for Review" |
-| **Expected Results** | - Form validates all fields<br>- Loading indicator during submission<br>- Success: "Product submitted for review"<br>- Redirected to product list<br>- Status shows "Pending Review" |
-
-| TC ID | TC_PREG_012 |
-|-------|------------|
-| **Description** | Verify submit with missing required fields |
-| **Pre-conditions** | User on product registration form |
-| **Procedure** | 1. Leave Product Name empty<br>2. Leave Price empty<br>3. Skip image upload<br>4. Click Submit |
-| **Expected Results** | - Validation errors displayed<br>- "Product name is required"<br>- "Price is required"<br>- "At least one image required"<br>- Form scrolls to first error |
-
-| TC ID | TC_PREG_013 |
-|-------|------------|
-| **Description** | Verify save as draft functionality |
-| **Pre-conditions** | User partially filled form |
-| **Procedure** | 1. Fill some fields (not all)<br>2. Click "Save as Draft" |
-| **Expected Results** | - Draft saved successfully<br>- Toast: "Draft saved"<br>- Can navigate away safely<br>- Draft appears in product list<br>- Can resume editing later |
-
-| TC ID | TC_PREG_014 |
-|-------|------------|
-| **Description** | Verify unsaved changes warning |
-| **Pre-conditions** | User made changes to form |
-| **Procedure** | 1. Edit product name<br>2. Try to navigate away without saving<br>3. Observe behavior |
-| **Expected Results** | - Browser/App shows warning dialog<br>- "You have unsaved changes"<br>- Options: Stay, Leave (discard)<br>- Staying keeps form data |
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| PREG01 | View registration form | 1. Login as Vendor<br>2. Navigate to "Thêm sản phẩm" | - Multi-section form displays<br>- Sections: Thông tin cơ bản, Giá cả, Hình ảnh, Chi tiết<br>- Progress indicator (if multi-step)<br>- Required fields marked (*) | Logged in as Vendor |
+| PREG02 | Basic info section | 1. On registration form<br>2. View basic info section | - Product Name input<br>- Category dropdown<br>- Subcategory (dynamic)<br>- Short Description<br>- SKU (optional) | Form open |
 
 ---
 
-## Summary
-| Status | Count |
-|--------|-------|
-| Total Test Cases | 14 |
-| Priority - High | 6 |
-| Priority - Medium | 5 |
-| Priority - Low | 3 |
+### Product Images Upload
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| PREG03 | Image upload area | 1. On registration form<br>2. Locate image section | - Drag-and-drop area visible<br>- "Click để tải lên" option<br>- Formats: JPG, PNG shown<br>- Max size: 5MB noted<br>- Min images required | Form open |
+| PREG04 | Upload single image | 1. On image section<br>2. Click upload area<br>3. Select valid JPG (2MB) | - File dialog opens<br>- Upload progress shows<br>- Preview displayed<br>- Delete option on image<br>- Can upload more | Form open |
+| PREG05 | Upload multiple images | 1. On image section<br>2. Select 5 images at once | - All images upload<br>- Progress shown for each<br>- Thumbnails in grid<br>- Drag to reorder (if supported)<br>- First = primary image | Form open |
+| PREG06 | Image validation | 1. On image section<br>2. Try upload PDF file<br>3. Try upload >5MB image | - Invalid format: "Chỉ chấp nhận JPG, PNG"<br>- Oversized: "File vượt quá 5MB"<br>- Files rejected<br>- Valid files accepted | Form open |
+
+---
+
+### Pricing & Inventory
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| PREG07 | Pricing section fields | 1. On registration form<br>2. View pricing section | - Price input with ₫ symbol<br>- Compare/original price (discount)<br>- Unit selection (kg, cái, gói)<br>- Stock quantity input<br>- Low stock threshold | Form open |
+| PREG08 | Price validation | 1. On pricing section<br>2. Enter price: -1000<br>3. Enter price: 0<br>4. Enter: "abc" | - Negative: "Giá phải > 0"<br>- Zero: Warning or error<br>- Non-numeric: Rejected<br>- Valid positive accepted | Form open |
+
+---
+
+### Product Details
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| PREG09 | Details section fields | 1. On registration form<br>2. View details section | - Full Description (rich editor)<br>- Weight input<br>- Dimensions (optional)<br>- Origin/Source<br>- Certifications selection | Form open |
+| PREG10 | Rich text editor | 1. On description field<br>2. Type text<br>3. Apply bold<br>4. Create bullet list | - Formatting tools visible<br>- Bold, italic work<br>- Lists created<br>- Links addable<br>- Preview shows formatted | Form open |
+
+---
+
+### Form Submission
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| PREG11 | Submit with valid data | 1. Fill all required fields<br>2. Upload ≥1 image<br>3. Click "Gửi duyệt" | - Form validates all fields<br>- Loading shows<br>- Success "Sản phẩm đã gửi duyệt"<br>- Redirect to product list<br>- Status = "Chờ duyệt" | All fields valid |
+| PREG12 | Submit missing fields | 1. Leave Product Name empty<br>2. Leave Price empty<br>3. Skip image upload<br>4. Click Submit | - Validation errors shown<br>- "Tên sản phẩm là bắt buộc"<br>- "Giá là bắt buộc"<br>- "Cần ít nhất 1 hình ảnh"<br>- Scroll to first error | Form open |
+| PREG13 | Save as draft | 1. Fill some fields (not all)<br>2. Click "Lưu nháp" | - Draft saved<br>- Toast "Đã lưu nháp"<br>- Can navigate away<br>- Draft in product list<br>- Can resume editing | Form open |
+| PREG14 | Unsaved changes warning | 1. Edit product name<br>2. Try navigate away without saving | - Warning dialog shows<br>- "Bạn có thay đổi chưa lưu"<br>- Options: Ở lại, Rời đi<br>- Stay keeps form data | Changes made |

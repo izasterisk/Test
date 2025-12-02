@@ -5,52 +5,41 @@
 | Field | Value |
 |-------|-------|
 | **Feature** | Cart & Order |
-| **Test requirement** | Cart page, Preview order, Order history pages available |
-| **Number of TCs** | 16 |
+| **Test requirement** | Cart, Preview Order, Order History pages available |
+| **Number of TCs** | 12 |
 
 ## Testing Round Summary
 
 | Testing Round | Passed | Failed | Pending | N/A |
 |---------------|--------|--------|---------|-----|
-| Round 1 | 0 | 0 | 16 | 0 |
-| Round 2 | 0 | 0 | 16 | 0 |
-| Round 3 | 0 | 0 | 16 | 0 |
+| Round 1 | 0 | 0 | 12 | 0 |
+| Round 2 | 0 | 0 | 12 | 0 |
+| Round 3 | 0 | 0 | 12 | 0 |
 
 ---
 
 ## Test Cases
 
-### Add to Cart (from Product Detail)
-
-| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
-|--------------|----------------------|---------------------|------------------|----------------|
-| ORD01 | Add product to cart - success | 1. Login as customer<br>2. Go to product detail page<br>3. Set quantity = 2<br>4. Click "Thêm vào giỏ hàng" | - Loading spinner on button<br>- Success toast with "Xem giỏ hàng →" link<br>- Cart badge updates (+2) | Logged in, in stock |
-| ORD02 | Add to cart - not logged in | 1. Logout<br>2. Go to product detail<br>3. Click "Thêm vào giỏ hàng" | - Error toast "Vui lòng đăng nhập"<br>- Redirect to /login after 2s | Not logged in |
-| ORD03 | Add to cart - out of stock | 1. Login<br>2. Go to product with stock = 0<br>3. Check "Thêm vào giỏ hàng" button | - Button disabled or shows "Hết hàng"<br>- Cannot add to cart | Product out of stock |
-| ORD04 | Add to cart - exceed stock | 1. Login<br>2. Product with stock = 3<br>3. Set quantity = 5<br>4. Click "Thêm vào giỏ hàng" | - Error message "Chỉ còn 3 sản phẩm"<br>- Not added to cart | Stock < requested |
-
----
-
 ### Cart Page (/cart)
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| ORD05 | View cart with items | 1. Add items to cart<br>2. Navigate to /cart | - Cart page loads<br>- Items listed with: image, name, price, quantity<br>- Subtotal per item correct<br>- Total calculated correctly | Cart has items |
-| ORD06 | View empty cart | 1. Remove all cart items<br>2. View /cart | - "Giỏ hàng đang trống" message<br>- Empty cart icon<br>- "Tiếp tục mua sắm" button visible<br>- Checkout button disabled | Empty cart |
-| ORD07 | Increase item quantity | 1. Go to /cart<br>2. Click "+" on an item | - Quantity increments<br>- Subtotal recalculates<br>- Total updates<br>- Loading spinner during update | Cart has items |
-| ORD08 | Decrease item quantity | 1. Go to /cart (item qty = 3)<br>2. Click "-" on the item | - Quantity decrements to 2<br>- Subtotal recalculates<br>- Total updates | Item qty > 1 |
-| ORD09 | Decrease to remove item | 1. Go to /cart (item qty = 1)<br>2. Click "-" on the item | - Item removed from cart<br>- Total recalculates<br>- Or confirmation dialog shows | Item qty = 1 |
-| ORD10 | Remove item - trash button | 1. Go to /cart<br>2. Click trash icon on item<br>3. Confirm in dialog | - Confirmation dialog shows<br>- Item removed<br>- Total recalculates<br>- Success feedback | Cart has items |
-| ORD11 | Remove item - cancel | 1. Go to /cart<br>2. Click trash icon<br>3. Click "Hủy" in dialog | - Dialog closes<br>- Item still in cart | Cart has items |
+| ORD01 | View cart page | 1. Login as customer<br>2. Click cart icon in navbar<br>3. Navigate to /cart | - Cart page displays<br>- Item list with images, names, prices<br>- Quantity controls per item<br>- Total amount calculated | Logged in, has items in cart |
+| ORD02 | View empty cart | 1. Login with empty cart<br>2. Navigate to /cart | - "Giỏ hàng trống" message<br>- Empty state illustration<br>- "Tiếp tục mua sắm" button<br>- Links to marketplace | Logged in, empty cart |
+| ORD03 | Increase item quantity | 1. Open /cart<br>2. Click "+" on an item<br>3. Observe changes | - Quantity increases by 1<br>- Item subtotal updates<br>- Cart total updates<br>- "+" disabled at max stock | Cart has items |
+| ORD04 | Decrease item quantity | 1. Open /cart<br>2. Click "-" on item with qty > 1 | - Quantity decreases by 1<br>- Subtotal updates<br>- Cart total updates | Item qty > 1 |
+| ORD05 | Remove item from cart | 1. Open /cart<br>2. Click remove/trash icon on item<br>3. Confirm if prompted | - Item removed from list<br>- Cart total updates<br>- Success toast shown<br>- Empty state if last item | Cart has items |
+| ORD06 | Select/Deselect items | 1. Open /cart<br>2. Uncheck one item checkbox<br>3. Observe total | - Item unchecked<br>- Total recalculates without item<br>- "Select all" checkbox updates | Multiple items in cart |
 
 ---
 
-### Preview Order (/preview-order)
+### Preview Order / Checkout
 
 | Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
 |--------------|----------------------|---------------------|------------------|----------------|
-| ORD12 | Navigate to preview order | 1. Go to /cart with items<br>2. Click "Xem trước đơn hàng" | - Navigate to /preview-order<br>- Order items listed<br>- Delivery address section<br>- Payment method section<br>- Total amount shown | Cart has items |
-| ORD13 | Select delivery address | 1. On preview order page<br>2. Click address dropdown<br>3. Select an address | - Address dropdown works<br>- Selected address displayed<br>- Shipping fee may update | Has saved addresses |
-| ORD14 | Add new address from order | 1. On preview order<br>2. Click "Thêm địa chỉ mới"<br>3. Fill and save address | - Address form opens<br>- New address saved<br>- New address selected | No addresses |
-| ORD15 | Select payment method | 1. On preview order<br>2. Select payment method (PayOS/COD) | - Payment options visible<br>- Selected method highlighted<br>- Order button enabled | Preview order page |
-| ORD16 | Preview order - no address | 1. Go to preview order (no saved address)<br>2. Try to proceed | - Warning "Vui lòng thêm địa chỉ"<br>- Cannot proceed without address | No address saved |
+| ORD07 | Proceed to checkout | 1. Open /cart with items<br>2. Select items<br>3. Click "Thanh toán" button | - Navigate to preview order page<br>- Selected items shown<br>- Address selection visible<br>- Payment method options | Items selected in cart |
+| ORD08 | Select shipping address | 1. On preview order page<br>2. Click "Thay đổi" on address<br>3. Select different address | - Address selection modal opens<br>- Addresses listed<br>- Selected address updates<br>- Shipping fee may update | Has multiple addresses |
+| ORD09 | Apply voucher code | 1. On preview order page<br>2. Enter voucher: "DISCOUNT10"<br>3. Click "Áp dụng" | - Voucher applied<br>- Discount shown<br>- Total recalculated<br>- Success message | Valid voucher exists |
+| ORD10 | Apply invalid voucher | 1. On preview order page<br>2. Enter voucher: "INVALID123"<br>3. Click "Áp dụng" | - Error "Mã giảm giá không hợp lệ"<br>- No discount applied<br>- Total unchanged | Preview order page |
+| ORD11 | Place order successfully | 1. On preview order<br>2. Select address<br>3. Select payment: COD<br>4. Click "Đặt hàng" | - Loading shows<br>- Success page displays<br>- Order ID shown<br>- Redirect to order history | All required info filled |
+| ORD12 | Place order - no address | 1. On preview order<br>2. No address selected<br>3. Click "Đặt hàng" | - Error "Vui lòng chọn địa chỉ giao hàng"<br>- Order not placed<br>- Address field highlighted | No address selected |

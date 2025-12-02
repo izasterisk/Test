@@ -1,146 +1,63 @@
-# Feature 6: Vendor Management - UI Test Cases
+# Feature_Vendor - Vendor Management UI Test Cases
 
 ## Sheet Information
+
 | Field | Value |
 |-------|-------|
-| **Sheet Name** | TC_Vendor |
 | **Feature** | Vendor Management |
-| **Module** | Vendor Dashboard, Profile & Registration |
-| **Total Test Cases** | 16 |
-| **Testing Type** | UI Functional Testing |
+| **Test requirement** | Vendor Registration, Dashboard, Profile pages available |
+| **Number of TCs** | 16 |
+
+## Testing Round Summary
+
+| Testing Round | Passed | Failed | Pending | N/A |
+|---------------|--------|--------|---------|-----|
+| Round 1 | 0 | 0 | 16 | 0 |
+| Round 2 | 0 | 0 | 16 | 0 |
+| Round 3 | 0 | 0 | 16 | 0 |
 
 ---
 
 ## Test Cases
 
-### 6.1 Vendor Registration
+### Vendor Registration
 
-| TC ID | TC_VEN_001 |
-|-------|------------|
-| **Description** | Verify vendor registration page layout |
-| **Pre-conditions** | User logged in as regular user (not vendor) |
-| **Procedure** | 1. Navigate to "Become a Vendor" page<br>2. Observe the registration form layout |
-| **Expected Results** | - Registration form displays with clear sections<br>- Required fields: Business Name, Tax ID, Description, Address<br>- Terms and conditions checkbox visible<br>- Submit button at bottom |
-
-| TC ID | TC_VEN_002 |
-|-------|------------|
-| **Description** | Verify vendor registration with valid data |
-| **Pre-conditions** | User on vendor registration page |
-| **Procedure** | 1. Enter Business Name: "Green Farm Co"<br>2. Enter Tax ID: "1234567890"<br>3. Enter business description<br>4. Fill address information<br>5. Check terms agreement<br>6. Click "Register as Vendor" |
-| **Expected Results** | - Form validates all fields<br>- Loading state during submission<br>- Success: "Registration submitted for review"<br>- Redirected to pending approval page |
-
-| TC ID | TC_VEN_003 |
-|-------|------------|
-| **Description** | Verify vendor registration - missing required fields |
-| **Pre-conditions** | User on vendor registration page |
-| **Procedure** | 1. Leave Business Name empty<br>2. Leave Tax ID empty<br>3. Click submit button |
-| **Expected Results** | - Validation errors appear inline<br>- "Business name is required"<br>- "Tax ID is required"<br>- Form does not submit<br>- Error fields highlighted in red |
-
-| TC ID | TC_VEN_004 |
-|-------|------------|
-| **Description** | Verify vendor registration - invalid Tax ID format |
-| **Pre-conditions** | User on vendor registration page |
-| **Procedure** | 1. Fill required fields<br>2. Enter Tax ID: "abc123" (invalid)<br>3. Click submit |
-| **Expected Results** | - Validation error: "Invalid Tax ID format"<br>- Tooltip or help text shows valid format<br>- Form does not submit |
-
-### 6.2 Vendor Dashboard
-
-| TC ID | TC_VEN_005 |
-|-------|------------|
-| **Description** | Verify Vendor Dashboard main layout |
-| **Pre-conditions** | User logged in as approved Vendor |
-| **Procedure** | 1. Navigate to Vendor Dashboard<br>2. Observe the main dashboard page |
-| **Expected Results** | - Dashboard header shows vendor business name<br>- Stats cards: Total Products, Orders, Revenue, Rating<br>- Recent orders section visible<br>- Quick action buttons available |
-
-| TC ID | TC_VEN_006 |
-|-------|------------|
-| **Description** | Verify Vendor sidebar navigation |
-| **Pre-conditions** | User on Vendor Dashboard |
-| **Procedure** | 1. Observe left sidebar menu<br>2. Click on each menu item<br>3. Verify navigation works |
-| **Expected Results** | - Sidebar shows: Dashboard, Products, Orders, Profile, Wallet, Settings<br>- Active menu item highlighted<br>- Click navigates to correct page<br>- Sidebar can collapse on mobile |
-
-| TC ID | TC_VEN_007 |
-|-------|------------|
-| **Description** | Verify dashboard stats cards update correctly |
-| **Pre-conditions** | Vendor has products and orders |
-| **Procedure** | 1. View dashboard stats<br>2. Note current values<br>3. Complete an order in another tab<br>4. Refresh dashboard |
-| **Expected Results** | - Stats cards show real data<br>- Numbers formatted correctly (currency, counts)<br>- Refresh updates values<br>- Loading skeleton while fetching |
-
-### 6.3 Vendor Profile Management
-
-| TC ID | TC_VEN_008 |
-|-------|------------|
-| **Description** | Verify vendor profile view page |
-| **Pre-conditions** | User logged in as Vendor |
-| **Procedure** | 1. Navigate to Vendor Profile page<br>2. Observe profile information |
-| **Expected Results** | - Profile shows: Business Name, Logo, Description<br>- Contact information displayed<br>- Address information visible<br>- Rating and review count shown<br>- "Edit Profile" button available |
-
-| TC ID | TC_VEN_009 |
-|-------|------------|
-| **Description** | Verify vendor profile edit functionality |
-| **Pre-conditions** | User on Vendor Profile page |
-| **Procedure** | 1. Click "Edit Profile" button<br>2. Edit form opens<br>3. Change business description<br>4. Click "Save Changes" |
-| **Expected Results** | - Edit modal/page opens with current data<br>- Fields are editable<br>- Validation on required fields<br>- Success toast: "Profile updated"<br>- Profile reflects changes |
-
-| TC ID | TC_VEN_010 |
-|-------|------------|
-| **Description** | Verify vendor logo upload |
-| **Pre-conditions** | User on Vendor Profile edit |
-| **Procedure** | 1. Click on logo upload area<br>2. Select valid image (PNG, 500x500, 1MB)<br>3. Observe preview<br>4. Save changes |
-| **Expected Results** | - File dialog opens<br>- Preview shows selected image<br>- Upload progress indicator<br>- Success: Logo updated on profile<br>- Old logo replaced |
-
-| TC ID | TC_VEN_011 |
-|-------|------------|
-| **Description** | Verify vendor logo upload - invalid file |
-| **Pre-conditions** | User on Vendor Profile edit |
-| **Procedure** | 1. Click logo upload<br>2. Select invalid file (PDF or >5MB image)<br>3. Observe error |
-| **Expected Results** | - Error: "Invalid file type" or "File too large"<br>- Upload rejected<br>- Supported formats and size limit shown |
-
-### 6.4 Vendor Products Management
-
-| TC ID | TC_VEN_012 |
-|-------|------------|
-| **Description** | Verify vendor products list page |
-| **Pre-conditions** | Vendor has products listed |
-| **Procedure** | 1. Navigate to "My Products" from vendor dashboard<br>2. Observe products table |
-| **Expected Results** | - Table shows vendor's products only<br>- Columns: Image, Name, Price, Stock, Status, Actions<br>- "Add Product" button visible<br>- Search and filter available |
-
-| TC ID | TC_VEN_013 |
-|-------|------------|
-| **Description** | Verify add new product button navigation |
-| **Pre-conditions** | User on vendor products page |
-| **Procedure** | 1. Click "Add Product" button<br>2. Observe navigation/modal |
-| **Expected Results** | - Navigates to product registration form<br>- Or opens product creation modal<br>- Form ready for input |
-
-| TC ID | TC_VEN_014 |
-|-------|------------|
-| **Description** | Verify product status toggle |
-| **Pre-conditions** | Vendor has active products |
-| **Procedure** | 1. Find an active product in list<br>2. Click status toggle or "Deactivate" button<br>3. Confirm action if prompted |
-| **Expected Results** | - Confirmation dialog appears<br>- After confirm: Status changes to "Inactive"<br>- Toast: "Product deactivated"<br>- Product hidden from marketplace |
-
-### 6.5 Vendor Orders
-
-| TC ID | TC_VEN_015 |
-|-------|------------|
-| **Description** | Verify vendor orders list |
-| **Pre-conditions** | Vendor has received orders |
-| **Procedure** | 1. Navigate to "Orders" from vendor dashboard<br>2. View orders list |
-| **Expected Results** | - Shows orders containing vendor's products<br>- Columns: Order ID, Customer, Items, Total, Status, Date<br>- Filter by status available<br>- Click row shows order details |
-
-| TC ID | TC_VEN_016 |
-|-------|------------|
-| **Description** | Verify vendor order detail view |
-| **Pre-conditions** | Vendor has orders |
-| **Procedure** | 1. Click on an order row to view details<br>2. Observe order detail page/modal |
-| **Expected Results** | - Shows ordered items with quantities<br>- Customer shipping address (partial for privacy)<br>- Order timeline/history<br>- Status update options if applicable<br>- Print/Export option available |
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| VEND01 | View vendor registration page | 1. Login as regular user<br>2. Navigate to "Trở thành người bán" | - Registration form displays<br>- Fields: Business Name, Tax ID, Description, Address<br>- Terms checkbox visible<br>- Submit button at bottom | Logged in as Customer |
+| VEND02 | Register vendor - valid data | 1. Open vendor registration<br>2. Enter Business Name: "Nông Trại Xanh"<br>3. Enter Tax ID: "0123456789"<br>4. Enter description<br>5. Fill address info<br>6. Check terms agreement<br>7. Click "Đăng ký" | - Loading shows<br>- Success "Đăng ký đang chờ xét duyệt"<br>- Redirect to pending page | Registration form open |
+| VEND03 | Register vendor - missing fields | 1. Open vendor registration<br>2. Leave Business Name empty<br>3. Leave Tax ID empty<br>4. Click submit | - Validation errors show<br>- "Tên doanh nghiệp là bắt buộc"<br>- "Mã số thuế là bắt buộc"<br>- Form not submitted | Registration form open |
+| VEND04 | Register vendor - invalid Tax ID | 1. Open vendor registration<br>2. Fill required fields<br>3. Enter Tax ID: "abc123"<br>4. Click submit | - Validation error "Mã số thuế không hợp lệ"<br>- Format hint shown<br>- Form not submitted | Registration form open |
 
 ---
 
-## Summary
-| Status | Count |
-|--------|-------|
-| Total Test Cases | 16 |
-| Priority - High | 7 |
-| Priority - Medium | 6 |
-| Priority - Low | 3 |
+### Vendor Dashboard
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| VEND05 | View vendor dashboard | 1. Login as approved Vendor<br>2. Navigate to /vendor | - Dashboard header with business name<br>- Stats cards: Products, Orders, Revenue, Rating<br>- Recent orders section<br>- Quick action buttons | Logged in as Vendor |
+| VEND06 | Vendor sidebar navigation | 1. On vendor dashboard<br>2. Observe left sidebar<br>3. Click each menu item | - Sidebar shows: Dashboard, Sản phẩm, Đơn hàng, Hồ sơ, Ví, Cài đặt<br>- Active item highlighted<br>- Navigation works correctly | Logged in as Vendor |
+| VEND07 | Dashboard stats display | 1. On vendor dashboard<br>2. Observe stats cards<br>3. Click a stats card | - Numbers formatted correctly<br>- Comparison % shown (if any)<br>- Click navigates to detail | Vendor has data |
+| VEND08 | Refresh dashboard data | 1. On vendor dashboard<br>2. Click refresh button<br>3. Or pull to refresh | - Loading indicator<br>- Data updates<br>- Timestamp updates | Logged in as Vendor |
+
+---
+
+### Vendor Profile
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| VEND09 | View vendor profile | 1. On vendor dashboard<br>2. Click "Hồ sơ" menu | - Profile displays: Business Name, Logo, Description<br>- Contact info shown<br>- Address visible<br>- Rating displayed<br>- "Chỉnh sửa" button | Logged in as Vendor |
+| VEND10 | Edit vendor profile | 1. On vendor profile<br>2. Click "Chỉnh sửa"<br>3. Update description<br>4. Click "Lưu" | - Edit form opens with data<br>- Fields editable<br>- Success toast "Cập nhật thành công"<br>- Profile reflects changes | Profile page open |
+| VEND11 | Upload vendor logo | 1. On vendor profile edit<br>2. Click logo area<br>3. Select valid image (PNG, < 2MB)<br>4. Save changes | - Preview shows<br>- Upload progress<br>- Logo updated on profile<br>- Success message | Edit mode active |
+| VEND12 | Upload logo - invalid file | 1. On profile edit<br>2. Try upload PDF file | - Error "Chỉ chấp nhận ảnh JPG, PNG"<br>- File rejected | Edit mode active |
+
+---
+
+### Vendor Products & Orders
+
+| Test Case ID | Test Case Description | Test Case Procedure | Expected Results | Pre-conditions |
+|--------------|----------------------|---------------------|------------------|----------------|
+| VEND13 | View vendor products list | 1. On vendor dashboard<br>2. Click "Sản phẩm" menu | - Table shows vendor's products<br>- Columns: Image, Name, Price, Stock, Status<br>- "Thêm sản phẩm" button<br>- Search available | Vendor has products |
+| VEND14 | Toggle product status | 1. On products list<br>2. Click status toggle on a product<br>3. Confirm if prompted | - Confirmation dialog shows<br>- Status changes (Active/Inactive)<br>- Toast message shown | Product exists |
+| VEND15 | View vendor orders | 1. On vendor dashboard<br>2. Click "Đơn hàng" menu | - Orders containing vendor products<br>- Columns: Order ID, Customer, Items, Total, Status<br>- Filter by status available | Vendor has orders |
+| VEND16 | View order detail | 1. On vendor orders list<br>2. Click an order row | - Order detail opens<br>- Items with quantities shown<br>- Customer address (partial)<br>- Order timeline visible | Orders exist |
