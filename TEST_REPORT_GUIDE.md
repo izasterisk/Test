@@ -57,23 +57,23 @@ Test cases focus on **User Interface Testing** - testing user interactions, form
 
 | No | Feature | Test Cases |
 |----|---------|------------|
-| 1 | Authentication | 8 |
-| 2 | User Management | 7 |
-| 3 | Product | 6 |
-| 4 | Cart & Order | 7 |
-| 5 | Inventory | 5 |
-| 6 | Vendor | 6 |
-| 7 | Payment & Wallet | 5 |
-| 8 | Farm & Crop | 5 |
-| 9 | Forum | 6 |
-| 10 | Notification | 4 |
-| 11 | Request & Support | 5 |
-| 12 | Chatbot | 5 |
-| 13 | Dashboard | 4 |
-| 14 | Product Registration | 5 |
-| 15 | Certificate | 4 |
+| 1 | Authentication | 18 |
+| 2 | User Management | 12 |
+| 3 | Product | 12 |
+| 4 | Cart & Order | 12 |
+| 5 | Inventory | 14 |
+| 6 | Vendor | 16 |
+| 7 | Payment & Wallet | 15 |
+| 8 | Farm & Crop | 14 |
+| 9 | Forum | 16 |
+| 10 | Notification | 12 |
+| 11 | Request & Support | 12 |
+| 12 | Chatbot | 12 |
+| 13 | Dashboard | 14 |
+| 14 | Product Registration | 14 |
+| 15 | Certificate | 12 |
 
-**Total: ~82 Test Cases**
+**Total: ~195 Test Cases**
 
 ---
 
@@ -157,37 +157,40 @@ Create 15 sheets with names from the "Sheet Name" column above.
 
 ## Test Case ID Naming Convention
 
-Format: `[Feature Code][Number]`
+Format: `TC_[Feature Code]_[Number]`
 
 | Feature | Code | Example |
 |---------|------|---------|
-| Authentication | AUTH | AUTH01 - AUTH08 |
-| User Management | USER | USER01 - USER07 |
-| Product | PROD | PROD01 - PROD06 |
-| Cart & Order | ORD | ORD01 - ORD07 |
-| Inventory | INV | INV01 - INV05 |
-| Vendor | VEND | VEND01 - VEND06 |
-| Payment & Wallet | PAY | PAY01 - PAY05 |
-| Farm & Crop | FARM | FARM01 - FARM05 |
-| Forum | FORUM | FORUM01 - FORUM06 |
-| Notification | NOTI | NOTI01 - NOTI04 |
-| Request & Support | REQ | REQ01 - REQ05 |
-| Chatbot | CHAT | CHAT01 - CHAT05 |
-| Dashboard | DASH | DASH01 - DASH04 |
-| Product Registration | PREG | PREG01 - PREG05 |
-| Certificate | CERT | CERT01 - CERT04 |
+| Authentication | AUTH | TC_AUTH_001 - TC_AUTH_018 |
+| User Management | USER | TC_USER_001 - TC_USER_012 |
+| Product | PROD | TC_PROD_001 - TC_PROD_012 |
+| Cart & Order | ORD | TC_ORD_001 - TC_ORD_012 |
+| Inventory | INV | TC_INV_001 - TC_INV_014 |
+| Vendor | VEND | TC_VEN_001 - TC_VEN_016 |
+| Payment & Wallet | PAY | TC_PAY_001 - TC_PAY_015 |
+| Farm & Crop | FARM | TC_FARM_001 - TC_FARM_014 |
+| Forum | FORUM | TC_FOR_001 - TC_FOR_016 |
+| Notification | NTF | TC_NTF_001 - TC_NTF_012 |
+| Request & Support | REQ | TC_REQ_001 - TC_REQ_012 |
+| Chatbot | CHAT | TC_CHAT_001 - TC_CHAT_012 |
+| Dashboard | DASH | TC_DASH_001 - TC_DASH_014 |
+| Product Registration | PREG | TC_PREG_001 - TC_PREG_014 |
+| Certificate | CERT | TC_CERT_001 - TC_CERT_012 |
 
 ---
 
-## UI Test Case Selection Principles (4-8 TC/feature)
+## UI Test Case Selection Principles (8-20 TC/feature)
 
-Select the most important UI test types for each feature:
+Select comprehensive UI test types for each feature:
 
-1. **Happy Path** (1-2 TC) - Test main success flow on UI
-2. **Validation** (1-2 TC) - Test invalid input, error messages
-3. **Edge Cases** (1 TC) - Empty state, boundary values
-4. **Navigation** (1 TC) - Page routing, redirects
-5. **Visual Feedback** (1 TC) - Loading, success/error messages
+1. **Happy Path** (2-4 TC) - Test main success flows on UI
+2. **Validation** (2-4 TC) - Test invalid input, error messages, boundary values
+3. **Edge Cases** (1-2 TC) - Empty state, max limits, special characters
+4. **Navigation** (1-2 TC) - Page routing, redirects, breadcrumbs
+5. **Visual Feedback** (1-2 TC) - Loading states, success/error toasts
+6. **CRUD Operations** (2-4 TC) - Create, Read, Update, Delete flows
+7. **Permission/Access** (1-2 TC) - Role-based access, unauthorized attempts
+8. **Pagination/Filter** (1-2 TC) - List filtering, sorting, pagination
 
 ---
 
@@ -229,8 +232,9 @@ After completing the Test Cases tab, see the detailed UI test cases for each Fea
   - 1 Test Statistics sheet
   - 15 Feature sheets
   
-- Total Test Cases: **~82 test cases**
+- Total Test Cases: **~195 test cases**
 
 - Focus on **user-facing interactions** not API calls
 - Test both **success** and **error** scenarios on UI
 - Include **visual feedback** (loading, toast messages)
+- Each feature has **8-20 detailed test cases**
