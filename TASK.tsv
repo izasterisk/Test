@@ -1,0 +1,173 @@
+HTTP Method	URL API	Mô tả chi tiết
+GET	api/Address/provinces	Lấy danh sách tất cả tỉnh/thành phố từ API GoShip để hiển thị cho người dùng chọn địa chỉ
+GET	api/Address/districts	Lấy danh sách quận/huyện theo ID tỉnh/thành phố từ API GoShip
+GET	api/Address/communes	Lấy danh sách phường/xã theo ID quận/huyện từ API GoShip
+POST	api/Auth/login	Xác thực đăng nhập bằng email và password, validate trạng thái user, tạo JWT token và refresh token, cập nhật thời gian đăng nhập cuối
+POST	api/Auth/google-login	Đăng nhập bằng Google ID Token, validate token với Google API, tự động tạo user mới nếu chưa tồn tại, trả về JWT token
+POST	api/Auth/send-verification	Gửi email xác thực chứa mã số 8 chữ số đến email người dùng để verify tài khoản
+POST	api/Auth/verify-email	Xác thực email người dùng bằng mã xác thực 8 chữ số đã gửi qua email
+POST	api/Auth/refresh-token	Làm mới JWT token khi token cũ hết hạn bằng refresh token, validate refresh token còn hiệu lực
+GET	api/Auth/profile	Lấy thông tin profile của user hiện tại từ JWT token bao gồm email, tên, role, avatar và trạng thái xác thực
+POST	api/Auth/forgot-password	Gửi email chứa mã đặt lại mật khẩu 8 ký tự đến email người dùng
+POST	api/Auth/reset-password	Đặt lại mật khẩu mới bằng email, mã xác thực và mật khẩu mới sau khi validate mã
+POST	api/Auth/change-password	Thay đổi mật khẩu người dùng đã đăng nhập, validate mật khẩu cũ trước khi cập nhật mật khẩu mới
+POST	api/Auth/logout	Đăng xuất người dùng bằng cách xóa refresh token trong database
+GET	api/BatchInventory	Lấy danh sách tất cả batch inventory với phân trang (page, pageSize)
+GET	api/BatchInventory/product/{productId}	Lấy danh sách batch inventory theo ID sản phẩm với phân trang
+GET	api/BatchInventory/vendor/{vendorId}	Lấy danh sách batch inventory theo ID nhà cung cấp với phân trang
+GET	api/BatchInventory/{id}	Lấy chi tiết một batch inventory theo ID
+POST	api/BatchInventory	Tạo mới batch inventory với thông tin lô hàng nhập kho
+PUT	api/BatchInventory/{id}	Cập nhật thông tin batch inventory theo ID
+DELETE	api/BatchInventory/{id}	Xóa batch inventory theo ID (hard delete)
+POST	api/BatchInventory/{id}/quality-check	Thực hiện kiểm tra chất lượng lô hàng, cập nhật trạng thái QC, ID người kiểm tra và ghi chú
+GET	api/BatchInventory/{batchId}/serials	Lấy danh sách tất cả số serial của một batch inventory theo batchId
+POST	api/Cart/add	Thêm sản phẩm vào giỏ hàng của user đăng nhập, validate sản phẩm chưa tồn tại trong cart
+PUT	api/Cart/update	Cập nhật số lượng sản phẩm trong giỏ hàng, nếu quantity=0 thì xóa sản phẩm khỏi cart (hard delete)
+GET	api/Cart	Lấy thông tin giỏ hàng của user hiện tại với danh sách sản phẩm và hình ảnh
+GET	api/Cashout/ip-address	Lấy địa chỉ IP hiện tại (IPv4 và IPv6) của server cho mục đích backend
+GET	api/Cashout/balance	Lấy số dư tài khoản PayOS Payout để kiểm tra trước khi xử lý cashout (chỉ Admin/Staff)
+POST	api/Cashout/refund/{requestId}	Xử lý hoàn tiền cho yêu cầu refund qua PayOS, đơn hàng phải đã giao và chưa quá 7 ngày
+POST	api/ChatbotConversation	Tạo cuộc hội thoại chatbot mới với tin nhắn đầu tiên, lấy userId từ token
+POST	api/ChatbotConversation/{conversationId}/message	Gửi tin nhắn mới trong cuộc hội thoại chatbot đã tồn tại
+PATCH	api/ChatbotConversation/{conversationId}	Cập nhật thông tin cuộc hội thoại chatbot (title, context, is_active)
+GET	api/ChatbotConversation	Lấy danh sách tất cả cuộc hội thoại chatbot của user hiện tại với phân trang
+GET	api/ChatbotConversation/{conversationId}/messages	Lấy danh sách tin nhắn trong cuộc hội thoại chatbot với phân trang
+POST	api/CO2/farm/{farmId}	Tạo dữ liệu CO2 footprint mới cho trang trại theo farmId
+GET	api/CO2/farm/{farmId}	Lấy tất cả dữ liệu môi trường CO2 của trang trại theo farmId
+GET	api/CO2/{id}	Lấy chi tiết dữ liệu môi trường CO2 theo ID
+DELETE	api/CO2/{id}	Xóa dữ liệu môi trường CO2 theo ID (hard delete)
+POST	api/farm/{farmId}/Crop	Thêm danh sách cây trồng vào trang trại, validate trùng lặp tên+ngày trồng, kiểm tra phương pháp trồng phù hợp
+PATCH	api/farm/{farmId}/Crop	Cập nhật thông tin các cây trồng của trang trại, validate phương pháp trồng và ngày trồng
+GET	api/Dashboard/revenue	Lấy doanh thu theo khoảng thời gian (from-to), Admin thấy toàn hệ thống, Vendor chỉ thấy của mình
+GET	api/Dashboard/best-selling-products	Lấy top 5 sản phẩm bán chạy nhất theo khoảng thời gian (from-to)
+GET	api/Dashboard/orders/statistics	Lấy thống kê số lượng đơn hàng theo từng trạng thái trong khoảng thời gian (chỉ Admin)
+GET	api/Dashboard/queues/statistics	Lấy số lượng các yêu cầu đang chờ xử lý (VendorProfile, ProductRegistration, Certificates, Request)
+GET	api/Dashboard/revenue/last-7-days	Lấy doanh thu từng ngày trong 7 ngày gần nhất
+POST	api/ExportInventory	Tạo đơn xuất kho (ReturnToVendor, Damage, Loss, Adjustment), không cho phép MovementType=Sale
+GET	api/ExportInventory/{id}	Lấy chi tiết đơn xuất kho theo ID
+GET	api/ExportInventory	Lấy danh sách tất cả đơn xuất kho với phân trang và filter theo MovementType
+GET	api/ExportInventory/identity-numbers/{productId}	Lấy danh sách số lô hoặc số sê-ri có sẵn trong kho theo ProductId
+GET	api/ExportInventory/exported-identity-numbers/{orderDetailId}	Lấy danh sách số lô/số sê-ri đã xuất kho theo OrderDetailId
+POST	api/FarmProfile	Tạo hồ sơ trang trại mới cho user hiện tại, lấy userId từ token đăng nhập
+GET	api/FarmProfile/{id}	Lấy thông tin chi tiết hồ sơ trang trại theo ID
+GET	api/FarmProfile/User/{userId}	Lấy danh sách tất cả hồ sơ trang trại của một user theo userId
+PATCH	api/FarmProfile/{id}	Cập nhật thông tin hồ sơ trang trại theo ID
+GET	api/ForumCategory	Lấy danh sách tất cả danh mục forum với phân trang
+GET	api/ForumCategory/{id}	Lấy chi tiết một danh mục forum theo ID
+POST	api/ForumCategory	Tạo mới danh mục forum
+PUT	api/ForumCategory/{id}	Cập nhật thông tin danh mục forum theo ID
+DELETE	api/ForumCategory/{id}	Xóa danh mục forum theo ID
+GET	api/ForumComment/post/{postId}	Lấy danh sách comment cha (parentId=null) của bài viết forum với replies nested bên trong
+GET	api/ForumComment/{id}	Lấy chi tiết một comment bao gồm toàn bộ replies dạng tree
+POST	api/ForumComment	Tạo comment mới hoặc reply comment, tự động gửi notification đến chủ bài viết/comment cha
+PUT	api/ForumComment/{id}	Cập nhật nội dung comment, chỉ người tạo comment mới được cập nhật
+DELETE	api/ForumComment/{id}	Xóa comment và toàn bộ replies (cascade delete)
+PATCH	api/ForumComment/{id}/status	Thay đổi trạng thái comment (Visible, Hidden, Deleted) để kiểm duyệt
+POST	api/ForumComment/{id}/like	Tăng LikeCount cho comment
+POST	api/ForumComment/{id}/dislike	Tăng DislikeCount cho comment
+GET	api/ForumPost	Lấy danh sách bài viết forum với phân trang
+GET	api/ForumPost/category/{categoryId}	Lấy danh sách bài viết forum theo danh mục với phân trang
+GET	api/ForumPost/{id}	Lấy chi tiết bài viết forum bao gồm content blocks, images và danh sách comments
+GET	api/ForumPost/{id}/with-comments	Lấy bài viết forum cùng toàn bộ comments có thể map thành nested comment
+POST	api/ForumPost	Tạo mới bài viết forum với hỗ trợ nhiều ContentBlock và upload nhiều ảnh (multipart/form-data)
+PUT	api/ForumPost/{id}	Cập nhật bài viết forum, cho phép chỉnh sửa nội dung, tags, content blocks và thêm/xóa ảnh
+DELETE	api/ForumPost/{id}	Xóa bài viết forum theo ID
+PATCH	api/ForumPost/{id}/pin	Pin hoặc Unpin bài viết forum
+PATCH	api/ForumPost/{id}/status	Thay đổi trạng thái hiển thị bài viết (Visible/Hidden)
+POST	api/ForumPost/{id}/view	Tăng ViewCount của bài viết khi người dùng mở chi tiết bài viết
+POST	api/ForumPost/{id}/like	Tăng LikeCount của bài viết forum
+POST	api/ForumPost/{id}/dislike	Tăng DislikeCount của bài viết forum
+PATCH	api/Notification/{id}/revert-read-status	Đảo ngược trạng thái đã đọc/chưa đọc của thông báo
+GET	api/Notification/user/{userId}	Lấy danh sách thông báo của user theo userId với phân trang
+DELETE	api/Notification/{id}	Xóa thông báo theo ID
+POST	api/Order/preview	Tạo preview đơn hàng để xem trước, tính toán phí vận chuyển từ GoShip, kiểm tra tồn kho và cache kết quả
+POST	api/Order/{orderPreviewId}	Tạo đơn hàng thực tế từ order preview, giảm stock quantity sản phẩm, lưu thông tin vận chuyển
+POST	api/Order/{orderId}/ship	Xuất kho và gán số serial/số lô cho sản phẩm, tạo shipment với GoShip, cập nhật trạng thái Shipped
+PUT	api/Order/{orderId}	Cập nhật trạng thái đơn hàng (Paid, Processing, Delivered, Cancelled, Refunded), user chỉ được cancel ở trạng thái Pending
+GET	api/Order/{orderId}	Lấy thông tin chi tiết đơn hàng theo ID bao gồm OrderDetails, Customer và địa chỉ
+GET	api/Order	Lấy danh sách tất cả đơn hàng với phân trang và filter theo status (chỉ Admin/Staff)
+GET	api/Order/user/{userId}	Lấy danh sách đơn hàng của một khách hàng theo userId với phân trang
+POST	api/PayOS/create/{orderId}	Tạo payment link PayOS cho đơn hàng với thông tin thanh toán
+POST	api/PayOS/webhook	Webhook handler nhận thông báo thanh toán từ PayOS, luôn trả về 200 OK
+POST	api/PayOS/confirm-webhook	Xác nhận webhook URL với PayOS
+GET	api/PayOS/payment-info/{transactionId}	Lấy thông tin chi tiết của giao dịch thanh toán theo transactionId
+POST	api/ProductCategory	Tạo danh mục sản phẩm mới
+GET	api/ProductCategory/{id}	Lấy thông tin danh mục sản phẩm theo ID
+GET	api/ProductCategory	Lấy danh sách tất cả danh mục sản phẩm với phân trang
+PATCH	api/ProductCategory/{id}	Cập nhật danh mục sản phẩm, không thể làm category con nếu đã là category cha
+POST	api/ProductCertificate/upload	Upload nhiều chứng nhận sản phẩm với file PDF (indexed: CertificationCode[], CertificationName[], Files[])
+GET	api/ProductCertificate	Lấy danh sách tất cả chứng nhận sản phẩm với phân trang
+GET	api/ProductCertificate/by-product/{productId}	Lấy danh sách chứng nhận của sản phẩm theo ProductId với phân trang
+GET	api/ProductCertificate/{id}	Lấy chi tiết chứng nhận sản phẩm theo ID
+POST	api/ProductCertificate	Tạo chứng nhận sản phẩm với 1 code/name và nhiều file PDF
+PUT	api/ProductCertificate/{id}	Cập nhật chứng nhận sản phẩm, có thể thêm/xóa file PDF
+PATCH	api/ProductCertificate/status/{id}	Duyệt hoặc từ chối chứng nhận sản phẩm với lý do (nếu reject)
+DELETE	api/ProductCertificate/{id}	Xóa chứng nhận sản phẩm theo ID
+GET	api/Product	Lấy danh sách sản phẩm với phân trang kèm thông tin cơ bản và hình ảnh
+GET	api/Product/{id}	Lấy chi tiết sản phẩm theo ID bao gồm đầy đủ thông tin và toàn bộ MediaLink ảnh
+GET	api/Product/by-category	Lấy danh sách sản phẩm theo CategoryId với phân trang, nếu không có categoryId trả về tất cả
+GET	api/Product/category/{categoryId}	Lấy danh sách sản phẩm theo CategoryId với phân trang
+GET	api/Product/vendor/{vendorId}	Lấy danh sách sản phẩm theo VendorId với phân trang
+PUT	api/Product/{id}	Cập nhật sản phẩm bao gồm thêm/xóa ảnh MediaLink
+PATCH	api/Product/{id}/emission	Cập nhật CommissionRate (tỷ lệ hoa hồng) của sản phẩm
+DELETE	api/Product/{id}	Xóa sản phẩm và có thể dọn ảnh MediaLink liên quan
+GET	api/ProductRegistrations	Lấy danh sách đăng ký sản phẩm với phân trang bao gồm hình ảnh, file manual và certificate
+GET	api/ProductRegistrations/{id}	Lấy chi tiết đăng ký sản phẩm theo ID bao gồm images, specifications và certificate
+GET	api/ProductRegistrations/vendor/{vendorId}	Lấy danh sách đăng ký sản phẩm của một Vendor với phân trang
+POST	api/ProductRegistrations	Tạo mới đăng ký sản phẩm với upload hình ảnh, file manual PDF và certificates PDF lên Cloudinary
+PUT	api/ProductRegistrations/{id}	Cập nhật đăng ký sản phẩm, thêm/xóa hình ảnh, certificate và manual
+PATCH	api/ProductRegistrations/{id}/status	Duyệt hoặc từ chối đăng ký sản phẩm, khi Approved tự động tạo Product và copy media/certificates
+DELETE	api/ProductRegistrations/{id}	Xóa đăng ký sản phẩm theo ID, không xóa Products đã được tạo từ Approved
+POST	api/ProductReview	Tạo đánh giá sản phẩm sau khi đơn hàng đã thanh toán, chỉ được đánh giá 1 lần/sản phẩm/đơn hàng, có thể upload ảnh
+GET	api/ProductReview/{id}	Lấy thông tin chi tiết đánh giá sản phẩm theo ID
+GET	api/ProductReview/product/{productId}	Lấy danh sách đánh giá của sản phẩm theo ProductId với phân trang
+GET	api/ProductReview/order/{orderId}	Lấy danh sách đánh giá của đơn hàng theo OrderId với phân trang
+GET	api/ProductReview/customer/{customerId}	Lấy danh sách đánh giá của khách hàng theo CustomerId với phân trang
+PUT	api/ProductReview/{id}	Cập nhật đánh giá sản phẩm, chỉ chủ sở hữu đánh giá mới được cập nhật
+DELETE	api/ProductReview/{id}	Xóa đánh giá sản phẩm, chỉ chủ sở hữu đánh giá mới được xóa
+GET	api/product-serials/product/{productId}	Lấy danh sách tất cả số serial của sản phẩm theo ProductId
+GET	api/product-serials/batch/{batchId}	Lấy danh sách tất cả số serial của batch theo batchId
+PATCH	api/product-serials/{serialId}/status	Cập nhật trạng thái của một product serial
+POST	api/RequestTicket	Tạo yêu cầu mới (RefundRequest hoặc SupportRequest)
+PATCH	api/RequestTicket/{requestId}/process	Xử lý yêu cầu: cập nhật trạng thái (InReview, Approved, Rejected, Cancelled) hoặc thêm ghi chú phản hồi
+POST	api/RequestTicket/{requestId}/message	Gửi tin nhắn mới cho yêu cầu, tối đa 3 tin nhắn, chỉ được gửi khi tin nhắn trước đã được phản hồi
+GET	api/RequestTicket/{requestId}	Lấy thông tin chi tiết yêu cầu theo requestId
+GET	api/RequestTicket/my-requests	Lấy danh sách tất cả yêu cầu của user hiện tại với phân trang
+GET	api/RequestTicket	Lấy danh sách tất cả yêu cầu với filter theo requestType và requestStatus (chỉ Admin/Staff)
+POST	api/UserBankAccounts/user/{userId}	Tạo tài khoản ngân hàng mới cho user theo userId
+PATCH	api/UserBankAccounts/{accountId}/deactivate	Vô hiệu hóa tài khoản ngân hàng (soft delete, không xóa khỏi DB)
+GET	api/UserBankAccounts/user/{userId}	Lấy danh sách tất cả tài khoản ngân hàng của user theo userId
+GET	api/UserBankAccounts/supported-banks	Lấy danh sách các ngân hàng được hỗ trợ từ VietQR (đã lọc transferSupported, lookupSupported, isTransfer)
+POST	api/User	Tạo user mới, mặc định role=Customer, nếu Admin/Staff thì tự động IsVerified=true và gửi email tài khoản
+POST	api/User/staff	Tạo tài khoản nhân viên mới với mật khẩu tự động được tạo và gửi qua email (chỉ Admin)
+GET	api/User/{id}	Lấy thông tin user theo ID (chỉ Admin/Staff)
+GET	api/User	Lấy danh sách tất cả user với phân trang và filter theo role (Customer, Staff, Admin, Vendor)
+PATCH	api/User/{id}	Cập nhật thông tin user bao gồm status (Active, Inactive, Suspended, Deleted)
+POST	api/User/{userId}/address	Tạo địa chỉ mới cho user theo userId
+PATCH	api/User/address/{addressId}	Cập nhật địa chỉ user theo addressId
+GET	api/VendorCertificate/vendor/{vendorId}	Lấy danh sách chứng nhận của vendor theo vendorId với phân trang
+GET	api/VendorCertificate/{id}	Lấy chi tiết chứng nhận vendor theo ID bao gồm metadata xác thực
+POST	api/VendorCertificate	Tạo nhiều chứng nhận vendor với upload file (CertificationCode[], CertificationName[], Files[] - mỗi index là 1 certificate)
+PUT	api/VendorCertificate/{id}	Cập nhật chứng nhận vendor, hỗ trợ thêm/xóa file PDF
+DELETE	api/VendorCertificate/{id}	Xóa chứng nhận vendor theo ID
+PATCH	api/VendorCertificate/{id}/change-status	Thay đổi trạng thái duyệt chứng nhận vendor với lý do từ chối (nếu có)
+GET	api/VendorProfiles	Lấy danh sách vendor profile đang active với phân trang kèm thông tin user, address và media chứng chỉ
+GET	api/VendorProfiles/{id}	Lấy chi tiết VendorProfile theo ID bao gồm thông tin vendor, user, địa chỉ và danh sách media chứng chỉ
+GET	api/VendorProfiles/by-user/{userId}	Lấy VendorProfile theo UserId (vendorId) để tìm vendor theo tài khoản user
+POST	api/VendorProfiles	Tạo mới VendorProfile: tạo User (Role=Vendor) → VendorProfile → Address → UserAddress → VendorCertificate (Pending) + MediaLink
+PUT	api/VendorProfiles/{id}	Cập nhật VendorProfile + thông tin User + địa chỉ hiện tại của vendor
+DELETE	api/VendorProfiles/{id}	Xóa VendorProfile (hard delete), không xóa user, chỉ xóa thông tin vendor profile
+DELETE	api/VendorProfiles/account/{userId}	Soft delete tài khoản vendor: set User.Status=Inactive và DeletedAt, không xóa dữ liệu
+POST	api/VendorProfiles/{id}/approve	Duyệt VendorProfile: update User (IsVerified), VendorProfile (VerifiedAt/By), duyệt tất cả VendorCertificate, gửi email xác nhận
+POST	api/VendorProfiles/{id}/reject	Từ chối VendorProfile: update User (IsVerified=false), VendorProfile, tất cả VendorCertificate=Rejected + lý do, gửi email báo từ chối
+POST	api/Wallet/{userId}/process-credits	Xử lý cộng tiền vào ví vendor từ các đơn hàng đã giao quá 7 ngày
+POST	api/Wallet/cashout-request	Tạo yêu cầu rút tiền từ ví, Vendor chỉ được tạo 1 yêu cầu pending tại một thời điểm
+GET	api/Wallet/{userId}/cashout-request	Lấy thông tin yêu cầu rút tiền đang pending của vendor theo userId
+GET	api/Wallet/cashout-requests	Lấy danh sách tất cả yêu cầu rút tiền đang pending với phân trang (chỉ Admin/Staff)
+GET	api/Wallet/{userId}/cashout-requests	Lấy danh sách tất cả yêu cầu rút tiền của một vendor cụ thể với phân trang
+DELETE	api/Wallet/cashout-request	Xóa yêu cầu rút tiền đang pending, chỉ vendor sở hữu yêu cầu mới được xóa
+POST	api/Wallet/{userId}/process-cashout-manual	Xử lý yêu cầu rút tiền thủ công (Completed cần gatewayPaymentId, Failed/Cancelled cần CancelReason)
+POST	api/Wallet/{userId}/process-cashout	Xử lý yêu cầu rút tiền tự động qua PayOS (chỉ Admin/Staff)
+GET	api/Weather/hourly/{farmId}	Lấy thông tin thời tiết theo giờ của nông trại cho ngày hôm nay dựa trên tọa độ địa chỉ nông trại
+GET	api/Weather/daily/{farmId}	Lấy thông tin thời tiết theo ngày của nông trại cho 7 ngày từ hôm nay dựa trên tọa độ nông trại
+GET	api/Weather/current/{farmId}	Lấy thông tin thời tiết hiện tại của nông trại dựa trên tọa độ địa chỉ nông trại
