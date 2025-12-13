@@ -151,6 +151,35 @@
 | 19 | updated_at | This timestamp is automatically updated every time the registration record is modified. |
 | 20 | approved_at | This is a timestamp that records when the registration was approved (null if not approved). |
 
+### 8.1. Product Update Request
+
+| No | Entity | Description |
+|----|--------|-------------|
+| 1 | id | This is the primary key for the table, a unique identifier for each product update request record. |
+| 2 | product_id | This is a foreign key that links to the products table. It identifies which product this update request is for. |
+| 3 | vendor_id | This is a foreign key that links to the users table. It identifies which vendor submitted this update request. |
+| 4 | category_id | This is a foreign key that links to the product_categories table. It indicates the proposed category for the product. |
+| 5 | product_code | This field stores the proposed product code for the updated product. |
+| 6 | product_name | This field stores the proposed name for the updated product. |
+| 7 | slug | This field stores the proposed URL-friendly version of the product name. |
+| 8 | description | This field provides the proposed detailed explanation of the product features and benefits. |
+| 9 | unit_price | This field stores the proposed selling price per unit. |
+| 10 | commission_rate | This field stores the proposed commission rate percentage for the platform. |
+| 11 | discount_percentage | This field stores the proposed discount percentage (0 if no discount). |
+| 12 | energy_efficiency_rating | This field stores the proposed energy efficiency rating (0-5) for the product. |
+| 13 | specifications | This field stores proposed technical specifications as JSON key-value pairs. |
+| 14 | manual_urls | This field stores URLs to proposed product manuals and documentation. |
+| 15 | public_url | This field stores a publicly accessible URL for the proposed product manual. |
+| 16 | warranty_months | This field stores the proposed warranty period in months. |
+| 17 | weight_kg | This field stores the proposed weight of the product in kilograms. |
+| 18 | dimensions_cm | This field stores the proposed product dimensions (length, width, height) as JSON object. |
+| 19 | status | This field indicates the current status of the update request (Pending, Approved, or Rejected). |
+| 20 | rejection_reason | This field stores the reason why the update was rejected by staff (null if approved or pending). |
+| 21 | processed_by | This is a foreign key linking to users table, indicating which staff member processed this request. |
+| 22 | processed_at | This is a timestamp that records when the update request was processed (null if not processed). |
+| 23 | created_at | This is a timestamp that records when the update request was submitted. |
+| 24 | updated_at | This timestamp is automatically updated every time the update request record is modified. |
+
 ### 9. Product Certificate
 
 | No | Entity | Description |
@@ -260,7 +289,7 @@
 |----|--------|-------------|
 | 1 | id | This is the primary key for the table, a unique identifier for each customer order. |
 | 2 | customer_id | This is a foreign key that links to the users table. It identifies which customer placed this order. |
-| 3 | status | This field indicates the current order status (Pending, Processing, Paid, Shipped, Delivered, Cancelled, or Refunded). |
+| 3 | status | This field indicates the current order status (Pending, Processing, Paid, Shipped, Delivered, Cancelled, Refunded, or Partial-Refund). |
 | 4 | subtotal | This field stores the total price of all items before taxes, shipping, and discounts. |
 | 5 | tax_amount | This field stores the calculated tax amount for this order (default is 0.00). |
 | 6 | shipping_fee | This field stores the delivery cost for this order (default is 0.00). |
@@ -296,7 +325,8 @@
 | 6 | discount_amount | This field stores the discount applied to this specific line item (default is 0.00). |
 | 7 | subtotal | This field stores the calculated total for this line item (quantity × unit_price - discount). |
 | 8 | is_wallet_credited | This is a boolean flag indicating whether the vendor's wallet has been credited for this item (true/false). |
-| 9 | updated_at | This timestamp is automatically updated every time the order detail is modified. |
+| 9 | is_refunded | This is a boolean flag indicating whether this product has been refunded (supports partial refund of orders). |
+| 10 | updated_at | This timestamp is automatically updated every time the order detail is modified. |
 
 ### 18. Payment
 
@@ -480,7 +510,7 @@
 | 2 | user_id | This is a foreign key that links to the users table. It identifies which user should receive this notification. |
 | 3 | title | This field stores the notification headline or subject. |
 | 4 | message | This field stores the detailed notification message content. |
-| 5 | reference_type | This field indicates what type of entity triggered this notification (Order, Payment, Request, etc.) - nullable. |
+| 5 | reference_type | This field indicates what type of entity triggered this notification (Order, Payment, Request, ProductUpdateRequests, etc.) - nullable. |
 | 6 | reference_id | This field stores the ID of the entity that triggered this notification - nullable. |
 | 7 | is_read | This is a boolean flag indicating whether the user has read this notification (true/false). |
 | 8 | created_at | This is a timestamp that records when the notification was created. |
@@ -551,7 +581,7 @@
 | No | Entity | Description |
 |----|--------|-------------|
 | 1 | id | This is the primary key for the table, a unique identifier for each media file record. |
-| 2 | owner_type | This field indicates what type of entity owns this media (VendorCertificates, Products, ProductReviews, ForumPosts, etc.). |
+| 2 | owner_type | This field indicates what type of entity owns this media (VendorCertificates, Products, ProductUpdateRequests, ProductReviews, ForumPosts, etc.). |
 | 3 | owner_id | This field stores the ID of the entity that owns this media file. |
 | 4 | image_url | This field stores the full URL to the uploaded image or file (up to 1024 characters). |
 | 5 | image_public_id | This field stores the public ID from the cloud storage service (e.g., Cloudinary) for management. |
